@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:id="@+id/signUpLayout"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="50dp"
+        android:textSize="30dp"/>
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signUpLayout"
+        android:hint="User Name"
+        android:id="@+id/userName"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"/>
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:hint="Eamil"
+        android:layout_below="@+id/userName"
+        android:id="@+id/eamil"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="30dp"/>
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:hint="password"
+        android:id="@+id/signUppassword"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/eamil"/>
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Passsword"
+        android:layout_below="@+id/signUppassword"
+        android:layout_marginLeft="60dp"
+        android:id="@+id/passwordConform"
+        android:layout_marginTop="30dp"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signUpButton"
+        android:layout_below="@+id/passwordConform"
+        android:layout_marginLeft="120dp"
+        android:text="Sign up"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signUpButton"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="50dp"
+        android:text="Already have an account?" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signUpButton"
+        android:text="Sign in"
+        android:textColor="#0DF316"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="50dp"/>
+
+
+
+
+
+</RelativeLayout>
