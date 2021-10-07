@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoctorAppointmentApp">
         <activity
-            android:name=".sign_up"
+            android:name=".SignUp"
             android:exported="true" />
         <activity
-            android:name=".sign_in"
+            android:name=".SignIn"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
