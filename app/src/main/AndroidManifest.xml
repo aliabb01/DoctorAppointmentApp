@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoctorAppointmentApp">
         <activity
+            android:name=".Doctor"
+            android:exported="true" />
+        <activity
+            android:name=".Admin"
+            android:exported="true" />
+        <activity
+            android:name=".Home"
+            android:exported="true" />
+        <activity
             android:name=".SignUp"
             android:exported="true" />
         <activity
