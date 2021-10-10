@@ -1,47 +1,27 @@
 package ali.app.doctorappointmentapp;
 
 public class Users {
-    private String name;
-    private String email;
-    private String password;
-    private Integer isadmin;
+    private  String Name;
+    private String Email;
 
-    public Users(String name, String email, String password, Integer isadmin) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.isadmin = isadmin;
+    public Users(String name, String email) {
+        this.Name = name;
+        this.Email = email;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Integer getIsadmin() {
-        return isadmin;
+        return Email;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
     public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setIsadmin(Integer isadmin) {
-        this.isadmin = isadmin;
+        Email = email;
     }
 }

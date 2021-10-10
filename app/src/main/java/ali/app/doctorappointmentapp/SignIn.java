@@ -44,14 +44,13 @@ public class SignIn extends AppCompatActivity {
                        Log.d("myTag", "onClick: CHECKROLE IS: " + checkRole);
                        if(checkRole != -1){
                            //Toast.makeText(SignIn.this,"Welcome back",Toast.LENGTH_SHORT).show();
-
                            switch (checkRole){
                                case 0:
                                    Intent intent=new Intent(SignIn.this, Home.class);
                                    startActivity(intent);
                                    break;
-                               case 1:
-                                   Intent intent1=new Intent(SignIn.this, Admin.class);
+                               case "Patient":
+                                   Intent intent1=new Intent(SignIn.this, Home.class);
                                    startActivity(intent1);
                                    break;
                                default:

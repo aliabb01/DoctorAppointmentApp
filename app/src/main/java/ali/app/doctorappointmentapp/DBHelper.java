@@ -7,10 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DBName = "Login.db";
+private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
         super(context, "Login.db", null, 9);
@@ -18,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        MyDB.execSQL("create Table users(userId INTEGER primary key AUTOINCREMENT ,username TEXT ,isAdmin INTEGER ,password TEXT ,email TEXT)");
+        MyDB.execSQL("create Table users(userId INTEGER primary key AUTOINCREMENT ,username TEXT ,isAdmin TEXT ,password TEXT ,email TEXT)");
 
     }
 
@@ -57,28 +61,36 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+  
     public Integer checkusernamepasswordrole(String username, String password) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username, password});
-
-        /*String isAdm = "";
-        if(cursor.getColumnIndex("isAdmin") == 1) {
-            Log.d("myTag", "checkusernamepasswordrole: User is ADMIN");
-            isAdm="Admin";
-        }
-        if(cursor.getColumnIndex("isAdmin") == 0) {
-            Log.d("myTag", "checkusernamepasswordrole: User is not ADMIN");
-            isAdm="User";
-        }*/
 
         cursor.moveToFirst();
         Integer isAdm = cursor.getInt(2);
 
         Log.d("myTag", "checkusernamepasswordrole: User is not ADMIN   " + isAdm);
 
-        cursor.close();
-
         return isAdm;
     }
+
+    public List<Users> getuserList(){
+        String sql="select * from  users";
+        sqLiteDatabase=this.getReadableDatabase();
+        List<Users> storeusers=new ArrayList<>();
+        Cursor cursor=sqLiteDatabase.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do{
+                //String id=cursor.getString(0);
+                String name=cursor.getString(0);
+                String email=cursor.getString(1);
+                storeusers.add(new Users(name,email));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return  storeusers;
+    }
+
+    
 
 }
