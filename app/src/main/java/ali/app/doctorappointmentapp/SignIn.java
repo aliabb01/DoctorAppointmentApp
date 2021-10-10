@@ -43,17 +43,17 @@ public class SignIn extends AppCompatActivity {
 
 
 
-                       int checkrole=db.checkusernamepasswordrole(user, pass);
-                       Log.d("myTag", "onClick: CHECKROLE IS: " + checkrole);
-                       if(checkrole!=-1){
-                           Toast.makeText(SignIn.this,"you loged to your account",Toast.LENGTH_SHORT).show();
-                           switch (checkrole){
-                               case 0:
-                                   Intent intent=new Intent(SignIn.this, Home.class);
+                       Boolean checkrole=db.checkusernamepasswordrole(userrole);
+
+                       if(checkrole){
+
+                           switch (userrole){
+                               case "Doctor":
+                                   Intent intent=new Intent(SignIn.this, Admin.class);
                                    startActivity(intent);
                                    break;
-                               case 1:
-                                   Intent intent1=new Intent(SignIn.this, Admin.class);
+                               case "Patient":
+                                   Intent intent1=new Intent(SignIn.this, Home.class);
                                    startActivity(intent1);
                                    break;
                                default:

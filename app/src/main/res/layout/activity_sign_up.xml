@@ -54,14 +54,15 @@
         android:layout_marginTop="30dp"
         android:hint="Confirm Passsword"
         android:minHeight="48dp" />
+
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/signUpButton"
         android:layout_below="@+id/passwordConform"
         android:layout_marginLeft="120dp"
-        android:text="Sign up"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="122dp"
+        android:text="Sign up" />
 
     <TextView
         android:id="@+id/textView"
@@ -81,14 +82,23 @@
         android:layout_marginLeft="270dp"
         android:layout_marginTop="50dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordConform"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:text="Choose Type" />
+
     <Spinner
         android:id="@+id/spinner2"
-        android:entries="@array/users"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="192dp"
+        android:layout_height="36dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="94dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="246dp"
+        android:entries="@array/users"
         android:minHeight="48dp" />
 
 

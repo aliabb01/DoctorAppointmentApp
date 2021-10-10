@@ -7,18 +7,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DBName = "Login.db";
+private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, "Login.db", null, 7);
+        super(context, "Login.db", null, 8);
     }
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        MyDB.execSQL("create Table users(userId INTEGER primary key AUTOINCREMENT ,username TEXT ,isAdmin INTEGER ,password TEXT ,email TEXT)");
+        MyDB.execSQL("create Table users(userId INTEGER primary key AUTOINCREMENT ,username TEXT ,isAdmin TEXT ,password TEXT ,email TEXT)");
 
     }
 
@@ -57,9 +61,28 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
     }
-    public int checkusernamepasswordrole(String username, String password) {
-        SQLiteDatabase MyDB = this.getReadableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username, password});
+    public List<Users> getuserList(){
+        String sql="select * from  users";
+        sqLiteDatabase=this.getReadableDatabase();
+        List<Users> storeusers=new ArrayList<>();
+        Cursor cursor=sqLiteDatabase.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do{
+                //String id=cursor.getString(0);
+                String name=cursor.getString(0);
+                String email=cursor.getString(1);
+                storeusers.add(new Users(name,email));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return  storeusers;
+    }
+
+
+
+    public Boolean checkusernamepasswordrole(String isAdmin) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from users where  isAdmin = ?", new String[] {isAdmin});
 
         /*String isAdm = "";
         if(cursor.getColumnIndex("isAdmin") == 1) {
@@ -71,13 +94,13 @@ public class DBHelper extends SQLiteOpenHelper {
             return "User";
         }*/
 
-        return cursor.getColumnIndex("isAdmin");
+       // return cursor.getColumnIndex("isAdmin");
 
 
-        /*if(cursor.getCount() > 0)
+        if(cursor.getCount() > 0)
             return true;
         else
-            return false;*/
+            return false;
     }
 
 }
