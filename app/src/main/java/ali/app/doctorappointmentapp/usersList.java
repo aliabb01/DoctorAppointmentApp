@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class usersList extends AppCompatActivity {
+public class UsersList extends AppCompatActivity {
    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,7 @@ public class usersList extends AppCompatActivity {
           DBHelper db=new DBHelper(this);
         List<Users> usersmodel=db.getuserList();
           if(usersmodel.size()>0){
-              UserAdapter usersadapter=new UserAdapter(usersmodel,usersList.this);
+              UserAdapter usersadapter=new UserAdapter(usersmodel, UsersList.this);
 recyclerView.setAdapter(usersadapter);
 
           }else

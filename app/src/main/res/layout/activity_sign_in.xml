@@ -89,6 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/password"
             android:layout_marginTop="32dp"
+            android:backgroundTint="#50C878"
             android:text="Sign in"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_begin="300dp" />
 
         <Button
             android:id="@+id/signIn__btnSignUp"
