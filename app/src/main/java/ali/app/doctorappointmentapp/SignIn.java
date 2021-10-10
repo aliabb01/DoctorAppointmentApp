@@ -25,15 +25,13 @@ public class SignIn extends AppCompatActivity {
         userSignin=findViewById(R.id.nameUser);
         passwordSignin=findViewById(R.id.password);
         signinButton=findViewById(R.id.signIn__btnSignIn);
-        userlist=findViewById(R.id.spinner);
         db=new DBHelper(this);
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String user = userSignin.getText().toString();
                 String pass = passwordSignin.getText().toString();
-                String  userrole=userlist.getSelectedItem().toString();
-              /// String admin="1";
+
                 if(user.equals("") || pass.equals(""))
                     Toast.makeText(SignIn.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 else {
@@ -42,14 +40,13 @@ public class SignIn extends AppCompatActivity {
                         Toast.makeText(SignIn.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
 
 
-
-                       Boolean checkrole=db.checkusernamepasswordrole(userrole);
-
-                       if(checkrole){
-
-                           switch (userrole){
-                               case "Doctor":
-                                   Intent intent=new Intent(SignIn.this, Admin.class);
+                       Integer checkRole=db.checkusernamepasswordrole(user, pass);
+                       Log.d("myTag", "onClick: CHECKROLE IS: " + checkRole);
+                       if(checkRole != -1){
+                           //Toast.makeText(SignIn.this,"Welcome back",Toast.LENGTH_SHORT).show();
+                           switch (checkRole){
+                               case 0:
+                                   Intent intent=new Intent(SignIn.this, Home.class);
                                    startActivity(intent);
                                    break;
                                case "Patient":
@@ -60,25 +57,13 @@ public class SignIn extends AppCompatActivity {
                                    Toast.makeText(SignIn.this, "no no ", Toast.LENGTH_SHORT).show();
                                    break;
                            }
+                           Toast.makeText(SignIn.this,"Welcome " + user,Toast.LENGTH_SHORT).show();
                        }
                        else
                        {
                            Toast.makeText(SignIn.this,"please check your role",Toast.LENGTH_SHORT).show();
 
                        }
-
-                        //here check the redirect page
-                 /*   Boolean check=db.checkrole(user,admin);
-                        switch (admin) {
-                            case "1":
-                                Toast.makeText(SignIn.this, "1", Toast.LENGTH_SHORT).show();
-                                break;
-                            case "0":
-                                Toast.makeText(SignIn.this, "2", Toast.LENGTH_SHORT).show();
-                                break;
-                            default:
-                                Toast.makeText(SignIn.this, "3", Toast.LENGTH_SHORT).show();
-                        }*/
 
                     } else {
                         Toast.makeText(SignIn.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();

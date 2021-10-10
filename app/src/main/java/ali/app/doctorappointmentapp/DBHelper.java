@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
 private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, "Login.db", null, 8);
+        super(context, "Login.db", null, 9);
     }
 
     @Override
@@ -61,6 +61,19 @@ private SQLiteDatabase sqLiteDatabase;
         else
             return false;
     }
+  
+    public Integer checkusernamepasswordrole(String username, String password) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username, password});
+
+        cursor.moveToFirst();
+        Integer isAdm = cursor.getInt(2);
+
+        Log.d("myTag", "checkusernamepasswordrole: User is not ADMIN   " + isAdm);
+
+        return isAdm;
+    }
+
     public List<Users> getuserList(){
         String sql="select * from  users";
         sqLiteDatabase=this.getReadableDatabase();
@@ -78,29 +91,6 @@ private SQLiteDatabase sqLiteDatabase;
         return  storeusers;
     }
 
-
-
-    public Boolean checkusernamepasswordrole(String isAdmin) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where  isAdmin = ?", new String[] {isAdmin});
-
-        /*String isAdm = "";
-        if(cursor.getColumnIndex("isAdmin") == 1) {
-            Log.d("myTag", "checkusernamepasswordrole: User is ADMIN");
-            return "Admin";
-        }
-        if(cursor.getColumnIndex("isAdmin") == 0) {
-            Log.d("myTag", "checkusernamepasswordrole: User is not ADMIN");
-            return "User";
-        }*/
-
-       // return cursor.getColumnIndex("isAdmin");
-
-
-        if(cursor.getCount() > 0)
-            return true;
-        else
-            return false;
-    }
+    
 
 }
