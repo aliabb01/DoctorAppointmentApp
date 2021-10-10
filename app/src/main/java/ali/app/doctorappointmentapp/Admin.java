@@ -21,7 +21,7 @@ public class Admin extends AppCompatActivity {
        userList.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Intent intent=new Intent(Admin.this, UsersList.class);
+               Intent intent=new Intent(Admin.this, userList.class);
                startActivity(intent);
            }
        });
