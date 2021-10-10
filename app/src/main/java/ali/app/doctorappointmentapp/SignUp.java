@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -16,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class SignUp extends AppCompatActivity {
     ConstraintLayout parent;
     EditText name,password,repPassword,email,message;
+    private Spinner userlist1;
     Button signupButton;
 
     DBHelper db;
@@ -29,6 +31,8 @@ public class SignUp extends AppCompatActivity {
         signupButton=findViewById(R.id.signUpButton);
         email=findViewById(R.id.eamil);
         message=findViewById(R.id.message);
+        userlist1=findViewById(R.id.spinner2);
+
         db = new DBHelper(this);
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +41,8 @@ public class SignUp extends AppCompatActivity {
                 String pass = password.getText().toString();
                 String repass = repPassword.getText().toString();
                 String userEmail=email.getText().toString();
+                String  userrole=userlist1.getSelectedItem().toString();
+
                 if(user.equals("") || pass.equals("") || repass.equals("")||userEmail.equals("")) {
                     Toast.makeText(SignUp.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 }
@@ -62,7 +68,7 @@ public class SignUp extends AppCompatActivity {
                     if (pass.equals(repass)) {
                         Boolean checkuser = db.checkusername(user);
                         if(checkuser==false) {
-                            Boolean insert = db.insertData(user,userEmail ,pass);
+                            Boolean insert = db.insertData(user,userEmail ,pass,userrole);
                             if(insert==true){
                                 Toast.makeText(SignUp.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);

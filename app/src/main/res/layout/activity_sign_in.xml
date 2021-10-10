@@ -130,6 +130,16 @@
             app:layout_constraintStart_toEndOf="@+id/newAccount"
             app:layout_constraintTop_toTopOf="@+id/newAccount" />
 
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:entries="@array/users"
+            tools:ignore="SpeakableTextPresentCheck" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
