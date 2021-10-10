@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DBName = "Login.db";
 
     public DBHelper(Context context) {
-        super(context, "Login.db", null, 7);
+        super(context, "Login.db", null, 9);
     }
 
     @Override
@@ -57,21 +57,28 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
     }
-    public int checkusernamepasswordrole(String username, String password) {
-        SQLiteDatabase MyDB = this.getReadableDatabase();
+    public Integer checkusernamepasswordrole(String username, String password) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username, password});
 
         /*String isAdm = "";
         if(cursor.getColumnIndex("isAdmin") == 1) {
             Log.d("myTag", "checkusernamepasswordrole: User is ADMIN");
-            return "Admin";
+            isAdm="Admin";
         }
         if(cursor.getColumnIndex("isAdmin") == 0) {
             Log.d("myTag", "checkusernamepasswordrole: User is not ADMIN");
-            return "User";
+            isAdm="User";
         }*/
 
-        return cursor.getColumnIndex("isAdmin");
+        cursor.moveToFirst();
+        Integer isAdm = cursor.getInt(2);
+
+        Log.d("myTag", "checkusernamepasswordrole: User is not ADMIN   " + isAdm);
+
+        //cursor.close();
+
+        return isAdm;
 
 
         /*if(cursor.getCount() > 0)

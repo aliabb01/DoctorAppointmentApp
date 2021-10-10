@@ -33,7 +33,7 @@ public class SignIn extends AppCompatActivity {
                 String user = userSignin.getText().toString();
                 String pass = passwordSignin.getText().toString();
                 String  userrole=userlist.getSelectedItem().toString();
-              /// String admin="1";
+
                 if(user.equals("") || pass.equals(""))
                     Toast.makeText(SignIn.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 else {
@@ -42,10 +42,9 @@ public class SignIn extends AppCompatActivity {
                         Toast.makeText(SignIn.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
 
 
-
-                       int checkrole=db.checkusernamepasswordrole(user, pass);
+                       Integer checkrole=db.checkusernamepasswordrole(user, pass);
                        Log.d("myTag", "onClick: CHECKROLE IS: " + checkrole);
-                       if(checkrole!=-1){
+                       if(true){
                            Toast.makeText(SignIn.this,"you loged to your account",Toast.LENGTH_SHORT).show();
                            switch (checkrole){
                                case 0:
@@ -66,19 +65,6 @@ public class SignIn extends AppCompatActivity {
                            Toast.makeText(SignIn.this,"please check your role",Toast.LENGTH_SHORT).show();
 
                        }
-
-                        //here check the redirect page
-                 /*   Boolean check=db.checkrole(user,admin);
-                        switch (admin) {
-                            case "1":
-                                Toast.makeText(SignIn.this, "1", Toast.LENGTH_SHORT).show();
-                                break;
-                            case "0":
-                                Toast.makeText(SignIn.this, "2", Toast.LENGTH_SHORT).show();
-                                break;
-                            default:
-                                Toast.makeText(SignIn.this, "3", Toast.LENGTH_SHORT).show();
-                        }*/
 
                     } else {
                         Toast.makeText(SignIn.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
