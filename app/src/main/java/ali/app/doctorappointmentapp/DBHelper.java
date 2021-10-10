@@ -14,15 +14,15 @@ import java.util.List;
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DBName = "Login.db";
-private SQLiteDatabase sqLiteDatabase;
+    private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, "Login.db", null, 9);
+        super(context, "Login.db", null, 8);
     }
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        MyDB.execSQL("create Table users(userId INTEGER primary key AUTOINCREMENT ,username TEXT ,isAdmin TEXT ,password TEXT ,email TEXT)");
+        MyDB.execSQL("create Table users(userId INTEGER primary key AUTOINCREMENT ,username TEXT ,role TEXT ,password TEXT ,email TEXT)");
 
     }
 
@@ -32,13 +32,13 @@ private SQLiteDatabase sqLiteDatabase;
         onCreate(MyDB);
     }
 
-    public Boolean insertData(String username,String email,String password,String isAdmin) {
+    public Boolean insertData(String username,String email,String password,String role) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
         contentValues.put("email", email);
         contentValues.put("password", password);
-        contentValues.put("isAdmin", isAdmin);
+        contentValues.put("role", role);
         long result = MyDB.insert("users", null, contentValues);
         if (result==-1) return false;
         else
@@ -62,16 +62,16 @@ private SQLiteDatabase sqLiteDatabase;
             return false;
     }
   
-    public Integer checkusernamepasswordrole(String username, String password) {
+    public String checkusernamepasswordrole(String username, String password) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username, password});
 
         cursor.moveToFirst();
-        Integer isAdm = cursor.getInt(2);
+        String role = cursor.getString(2);
 
-        Log.d("myTag", "checkusernamepasswordrole: User is not ADMIN   " + isAdm);
+        Log.d("myTag", "checkusernamepasswordrole: User is: " + role);
 
-        return isAdm;
+        return role;
     }
 
     public List<Users> getuserList(){
