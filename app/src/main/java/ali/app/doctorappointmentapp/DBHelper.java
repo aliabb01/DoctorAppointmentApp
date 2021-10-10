@@ -76,15 +76,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Log.d("myTag", "checkusernamepasswordrole: User is not ADMIN   " + isAdm);
 
-        //cursor.close();
+        cursor.close();
 
         return isAdm;
-
-
-        /*if(cursor.getCount() > 0)
-            return true;
-        else
-            return false;*/
     }
 
 }

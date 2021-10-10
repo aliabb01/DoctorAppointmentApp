@@ -25,14 +25,12 @@ public class SignIn extends AppCompatActivity {
         userSignin=findViewById(R.id.nameUser);
         passwordSignin=findViewById(R.id.password);
         signinButton=findViewById(R.id.signIn__btnSignIn);
-        userlist=findViewById(R.id.spinner);
         db=new DBHelper(this);
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String user = userSignin.getText().toString();
                 String pass = passwordSignin.getText().toString();
-                String  userrole=userlist.getSelectedItem().toString();
 
                 if(user.equals("") || pass.equals(""))
                     Toast.makeText(SignIn.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
@@ -42,11 +40,12 @@ public class SignIn extends AppCompatActivity {
                         Toast.makeText(SignIn.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
 
 
-                       Integer checkrole=db.checkusernamepasswordrole(user, pass);
-                       Log.d("myTag", "onClick: CHECKROLE IS: " + checkrole);
-                       if(true){
-                           Toast.makeText(SignIn.this,"you loged to your account",Toast.LENGTH_SHORT).show();
-                           switch (checkrole){
+                       Integer checkRole=db.checkusernamepasswordrole(user, pass);
+                       Log.d("myTag", "onClick: CHECKROLE IS: " + checkRole);
+                       if(checkRole != -1){
+                           //Toast.makeText(SignIn.this,"Welcome back",Toast.LENGTH_SHORT).show();
+
+                           switch (checkRole){
                                case 0:
                                    Intent intent=new Intent(SignIn.this, Home.class);
                                    startActivity(intent);
@@ -59,6 +58,7 @@ public class SignIn extends AppCompatActivity {
                                    Toast.makeText(SignIn.this, "no no ", Toast.LENGTH_SHORT).show();
                                    break;
                            }
+                           Toast.makeText(SignIn.this,"Welcome " + user,Toast.LENGTH_SHORT).show();
                        }
                        else
                        {
