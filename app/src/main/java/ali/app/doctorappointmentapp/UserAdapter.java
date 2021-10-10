@@ -15,36 +15,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-List<Users>user;
-  Context context;
-  DBHelper db;
-  public  UserAdapter(List<Users>user,Context context){
-      this.user=user;
-      this.context=context;
+    List<Users> user;
+    Context context;
+    DBHelper db;
 
-      db=new DBHelper(context);
-  }
+    public UserAdapter(List<Users> user, Context context) {
+        this.user = user;
+        this.context = context;
 
+        db = new DBHelper(context);
+    }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
-        View view=layoutInflater.inflate(R.layout.user_item_list,parent,false);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.user_item_list, parent, false);
 
 
-        ViewHolder viewHolder=new ViewHolder(view);
-        return  viewHolder;
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            final Users userAdapter=user.get(position);
-              holder.userList_name.setText(userAdapter.getName());
-              holder.userList_email.setText(userAdapter.getEmail());
+        final Users userAdapter = user.get(position);
+        holder.userList_name.setText(userAdapter.getName());
+        holder.userList_email.setText(userAdapter.getEmail());
     }
-
 
 
     @Override
@@ -52,14 +51,15 @@ List<Users>user;
         return user.size();
     }
 
-    public  class  ViewHolder extends RecyclerView.ViewHolder{
-       private     EditText userList_name,userList_email;
-      private       Button update_user,delete_user;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private EditText userList_name, userList_email;
+        private Button update_user, delete_user;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-           userList_name=itemView.findViewById(R.id.editText_name);
-            userList_email=itemView.findViewById(R.id.editText_email);
+            userList_name = itemView.findViewById(R.id.editText_name);
+            userList_email = itemView.findViewById(R.id.editText_email);
            /* update_user=itemView.findViewById(R.id.updateUser);
             delete_user=itemView.findViewById(R.id.deleteUser);*/
         }
