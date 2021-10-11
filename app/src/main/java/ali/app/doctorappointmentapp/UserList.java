@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class userList extends AppCompatActivity {
+public class UserList extends AppCompatActivity {
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +22,12 @@ public class userList extends AppCompatActivity {
 
         DBHelper db=new DBHelper(this);
         List<Users> usersmodel=db.getuserList();
-        if(usersmodel.size()>0){
-            UserAdapter usersadapter=new UserAdapter(usersmodel,userList.this);
+        if(usersmodel.size()>0) {
+            UserAdapter usersadapter=new UserAdapter(usersmodel, UserList.this);
             recyclerView.setAdapter(usersadapter);
 
-        }else
-        {
+        }
+        else {
             Toast.makeText(this, "no item", Toast.LENGTH_SHORT).show();
         }
     }
