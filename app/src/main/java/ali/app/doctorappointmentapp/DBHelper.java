@@ -13,11 +13,11 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DBName = "Login.db";
+    public static final String DBName = "App.db";
     private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, "Login.db", null, 8);
+        super(context, "App.db", null, 11);
     }
 
     @Override
