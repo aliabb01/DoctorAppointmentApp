@@ -15,7 +15,7 @@ public class SignUp extends AppCompatActivity {
     ConstraintLayout parent;
     EditText name,password,repPassword,email,message;
     private Spinner userlist1;
-    Button signupButton;
+    Button signupButton, singInBtn;
 
     DBHelper db;
     @Override
@@ -26,6 +26,7 @@ public class SignUp extends AppCompatActivity {
         password=findViewById(R.id.signUp_password);
         repPassword=findViewById(R.id.signUp_pwConf);
         signupButton=findViewById(R.id.signUp_btnSubmit);
+        singInBtn = findViewById(R.id.signUp_btnSignin);
         email=findViewById(R.id.signUp_email);
         userlist1=findViewById(R.id.signUp_usertype);
 
@@ -65,6 +66,14 @@ public class SignUp extends AppCompatActivity {
                         Toast.makeText(SignUp.this, "Passwords not matching", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+
+        singInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignIn.class);
+                startActivity(intent);
             }
         });
 

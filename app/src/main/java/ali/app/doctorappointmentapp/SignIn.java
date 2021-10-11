@@ -3,7 +3,6 @@ package ali.app.doctorappointmentapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 public class SignIn extends AppCompatActivity {
     EditText userSignin,passwordSignin;
     Spinner userlist;
-    Button signinButton;
+    Button signinButton, signUpBtn;
     DBHelper db;
 
     @Override
@@ -24,7 +23,9 @@ public class SignIn extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         userSignin=findViewById(R.id.nameUser);
         passwordSignin=findViewById(R.id.password);
-        signinButton=findViewById(R.id.signIn__btnSignIn);
+        signinButton=findViewById(R.id.signIn_btnSignIn);
+        signUpBtn = findViewById(R.id.signIn_btnSignUp);
+
         db=new DBHelper(this);
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +74,14 @@ public class SignIn extends AppCompatActivity {
                         Toast.makeText(SignIn.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignUp.class);
+                startActivity(intent);
             }
         });
 
