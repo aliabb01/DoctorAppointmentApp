@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, "App.db", null, 10);
+        super(context, "App.db", null, 13);
     }
 
     @Override
@@ -34,17 +34,23 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(MyDB);
     }
 
-    public Boolean insertData(String username,String email,String password,String role) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("username", username);
-        contentValues.put("email", email);
-        contentValues.put("password", password);
-        contentValues.put("role", role);
-        long result = MyDB.insert("users", null, contentValues);
-        if (result==-1) return false;
-        else
-            return true;
+    public Boolean insertData(Users user) {
+        Boolean res = true;
+        try {
+            SQLiteDatabase MyDB = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            //  contentValues.put("userId", user.getUserId());
+            contentValues.put("username", user.getName());
+            contentValues.put("role", user.getRole());
+            contentValues.put("password", user.getPassword());
+            contentValues.put("email", user.getEmail());
+
+            res = MyDB.insert("users", null, contentValues) > 0;
+        } catch (Exception e) {
+            res = false;
+        }
+        return res;
+
     }
 
     public Boolean insertServices(String serviceName,String description) {
@@ -60,25 +66,37 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Boolean checkusername(String username){
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[] {username} );
-        if(cursor.getCount() > 0)
+        Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
+        if (cursor.getCount() > 0)
             return true;
         else
             return false;
     }
 
-    public Boolean checkusernamepassword(String username, String password) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username, password});
-        if(cursor.getCount() > 0)
-            return true;
-        else
-            return false;
+    public Users checkusernamepassword(String username, String password) {
+        Users user = null;
+        try {
+            SQLiteDatabase MyDB = this.getWritableDatabase();
+            Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[]{username, password});
+            if (cursor.moveToFirst()) {
+                user = new Users();
+                //        user.setUserId(cursor.getInt(0));
+                user.setName(cursor.getString(1));
+                user.setRole(cursor.getString(2));
+                user.setPassword(cursor.getString(3));
+                user.setEmail(cursor.getString(4));
+            }
+        } catch (Exception e) {
+            user = null;
+        }
+
+        return user;
+
     }
-  
+
     public String checkusernamepasswordrole(String username, String password) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username, password});
+        Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[]{username, password});
 
         cursor.moveToFirst();
         String role = cursor.getString(2);
@@ -88,21 +106,22 @@ public class DBHelper extends SQLiteOpenHelper {
         return role;
     }
 
-    public List<Users> getuserList(){
-        String sql="select * from  users";
-        sqLiteDatabase=this.getReadableDatabase();
-        List<Users> storeusers=new ArrayList<>();
-        Cursor cursor=sqLiteDatabase.rawQuery(sql,null);
-        if(cursor.moveToFirst()){
-            do{
+
+    public List<Users> getuserList() {
+        String sql = "SELECT * FROM users ORDER BY username DESC";
+        sqLiteDatabase = this.getReadableDatabase();
+        List<Users> storeusers = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
                 //String id=cursor.getString(0);
-                String name=cursor.getString(0);
-                String email=cursor.getString(1);
-                storeusers.add(new Users(name,email));
-            }while (cursor.moveToNext());
+                String name = cursor.getString(0);
+                String email = cursor.getString(1);
+                storeusers.add(new Users(name, email));
+            } while (cursor.moveToNext());
         }
         cursor.close();
-        return  storeusers;
+        return storeusers;
     }
 
     public List<Services> getServiceList(){
@@ -121,7 +140,4 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return  storeServices;
     }
-
-    
-
 }
