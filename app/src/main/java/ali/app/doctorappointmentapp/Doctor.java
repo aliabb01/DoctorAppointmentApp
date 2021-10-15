@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Doctor extends AppCompatActivity {
@@ -16,6 +18,7 @@ public class Doctor extends AppCompatActivity {
     private Button submitService;
     private EditText serviceName;
     private EditText description;
+    TextView welcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,11 @@ public class Doctor extends AppCompatActivity {
         description = findViewById(R.id.description);
 
         db = new DBHelper(this);
+
+        welcome=findViewById(R.id.textView4);
+        Intent intent=getIntent();
+        Users user= (Users) intent.getSerializableExtra("user");
+        welcome.setText("hello"+user.getName());
 
         submitService.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +56,8 @@ public class Doctor extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
 
