@@ -26,6 +26,14 @@ public class Admin extends AppCompatActivity {
            }
        });
 
+        services.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Admin.this, ServicesList.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

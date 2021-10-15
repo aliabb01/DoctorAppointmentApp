@@ -17,18 +17,20 @@ public class DBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, "App.db", null, 11);
+        super(context, "App.db", null, 10);
     }
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
         MyDB.execSQL("create Table users(userId INTEGER primary key AUTOINCREMENT ,username TEXT ,role TEXT ,password TEXT ,email TEXT)");
+        MyDB.execSQL("create Table services(servicesId INTEGER primary key AUTOINCREMENT ,serviceName TEXT ,description TEXT)");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
         MyDB.execSQL("drop Table if exists users");
+        MyDB.execSQL("drop Table if exists services");
         onCreate(MyDB);
     }
 
@@ -44,6 +46,18 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return true;
     }
+
+    public Boolean insertServices(String serviceName,String description) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("serviceName", serviceName);
+        contentValues.put("description", description);
+        long result = MyDB.insert("services", null, contentValues);
+        if (result==-1) return false;
+        else
+            return true;
+    }
+
     public Boolean checkusername(String username){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[] {username} );
@@ -89,6 +103,23 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return  storeusers;
+    }
+
+    public List<Services> getServiceList(){
+        String sql="select * from services";
+        sqLiteDatabase=this.getReadableDatabase();
+        List<Services> storeServices=new ArrayList<>();
+        Cursor cursor=sqLiteDatabase.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do{
+                //String id=cursor.getString(0);
+                String serviceName=cursor.getString(0);
+                String description=cursor.getString(1);
+                storeServices.add(new Services(serviceName,description));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return  storeServices;
     }
 
     
