@@ -4,4 +4,7 @@
         <item>Patient</item>
         <item>Doctor</item>
     </string-array>
+
+    <string name="home_menu">Home</string>
+    <string name="settings">Settings</string>
 </resources>
