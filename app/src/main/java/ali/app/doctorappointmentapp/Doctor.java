@@ -25,18 +25,18 @@ public class Doctor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
 
-        submitService = findViewById(R.id.submitService);
+        /*submitService = findViewById(R.id.submitService);
         serviceName = findViewById(R.id.serviceName);
-        description = findViewById(R.id.description);
+        description = findViewById(R.id.description);*/
 
         db = new DBHelper(this);
 
-        welcome=findViewById(R.id.textView4);
+        /*welcome=findViewById(R.id.textView4);
         Intent intent=getIntent();
         Users user= (Users) intent.getSerializableExtra("user");
-        welcome.setText("hello"+user.getName());
+        welcome.setText("hello"+user.getName());*/
 
-        submitService.setOnClickListener(new View.OnClickListener() {
+        /*submitService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String serviceNameLabel = serviceName.getText().toString();
@@ -55,7 +55,7 @@ public class Doctor extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
 
 
     }
