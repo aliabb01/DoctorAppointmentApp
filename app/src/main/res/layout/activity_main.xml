@@ -21,21 +21,24 @@
 
     <Button
         android:id="@+id/btnSignIn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="#45C16E"
-        android:elevation="10sp"
         android:text="Sign In"
         android:textAllCaps="false"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:cornerRadius="50dp"
+        app:cornerRadius="5dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:elevation="5dp"
+        />
 
     <ImageView
         android:id="@+id/brandLogo"
@@ -49,18 +52,31 @@
 
     <Button
         android:id="@+id/btnSignUp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="100dp"
-        android:backgroundTint="#FF5C5C"
-        android:elevation="10sp"
+        android:backgroundTint="#FFFFFF"
         android:text="Sign Up"
         android:textAllCaps="false"
+        android:textColor="#FF5C5C"
         android:textSize="16sp"
-        app:cornerRadius="50dp"
+        app:cornerRadius="5dp"
+        app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#FF5C5C"
+        app:strokeWidth="2dp"
+        app:rippleColor="#FF5C5C"
+        />
+
+
+    <!--app:strokeColor="#FF5C5C"
+    app:strokeWidth="2dp"
+    app:rippleColor="#FF5C5C"-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
