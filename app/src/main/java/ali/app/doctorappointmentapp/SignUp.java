@@ -41,7 +41,7 @@ public class SignUp extends AppCompatActivity {
                 String pas = password.getText().toString();
                 try {
                     db = new DBHelper(getApplicationContext());
-                    Users user = new Users();
+                    User user = new User();
                     user.setName(name.getText().toString());
                     user.setPassword(password.getText().toString());
                     user.setEmail(email.getText().toString());

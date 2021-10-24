@@ -3,9 +3,7 @@ package ali.app.doctorappointmentapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +32,7 @@ public class SignIn extends AppCompatActivity {
                 String userlogin = userSignin.getText().toString();
                 String pass = passwordSignin.getText().toString();
                 db = new DBHelper(getApplicationContext());
-                Users user = db.checkusernamepassword(userlogin, pass);
+                User user = db.checkusernamepassword(userlogin, pass);
                 if (userlogin.equals("") || pass.equals("")) {
                     Toast.makeText(SignIn.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 } else {

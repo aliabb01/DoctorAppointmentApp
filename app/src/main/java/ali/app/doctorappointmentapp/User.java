@@ -2,19 +2,19 @@ package ali.app.doctorappointmentapp;
 
 import java.io.Serializable;
 
-public class Users implements Serializable {
+public class User implements Serializable {
 
     private  String Name;
     private String Email;
     private String password;
     private  String Role;
 
-    public Users(String name, String email) {
+    public User(String name, String email) {
         this.Name = name;
         this.Email = email;
     }
 
-    public Users() {
+    public User() {
 
     }
 

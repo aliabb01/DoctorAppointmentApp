@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 public class Home extends AppCompatActivity {
@@ -19,7 +18,7 @@ public class Home extends AppCompatActivity {
         welcome1 = (TextView) findViewById(R.id.homeEmail);
         welcome2 = (TextView) findViewById(R.id.homePassword);
         Intent intent = getIntent();
-        Users user = (Users) intent.getSerializableExtra("user");
+        User user = (User) intent.getSerializableExtra("user");
         /// welcome.setText("Hello"+user);
         welcome.setText("hello " + user.getName());
         welcome1.setText("hello " + user.getEmail());
