@@ -5,20 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Doctor extends AppCompatActivity {
 
     DBHelper db;
 
-    private Button submitService;
-    private EditText serviceName;
-    private EditText description;
-    TextView welcome;
+    private TextView userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +23,12 @@ public class Doctor extends AppCompatActivity {
         description = findViewById(R.id.description);*/
 
         db = new DBHelper(this);
+
+        userName = findViewById(R.id.doctor_username);
+
+        Intent intent=getIntent();
+        User user= (User) intent.getSerializableExtra("user");
+        userName.setText(user.getName());
 
         /*welcome=findViewById(R.id.textView4);
         Intent intent=getIntent();

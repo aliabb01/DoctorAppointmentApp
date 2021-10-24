@@ -34,7 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(MyDB);
     }
 
-    public Boolean insertData(Users user) {
+    public Boolean insertData(User user) {
         Boolean res = true;
         try {
             SQLiteDatabase MyDB = this.getWritableDatabase();
@@ -73,13 +73,13 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    public Users checkusernamepassword(String username, String password) {
-        Users user = null;
+    public User checkusernamepassword(String username, String password) {
+        User user = null;
         try {
             SQLiteDatabase MyDB = this.getWritableDatabase();
             Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[]{username, password});
             if (cursor.moveToFirst()) {
-                user = new Users();
+                user = new User();
                 //        user.setUserId(cursor.getInt(0));
                 user.setName(cursor.getString(1));
                 user.setRole(cursor.getString(2));
@@ -107,17 +107,17 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<Users> getuserList() {
+    public List<User> getuserList() {
         String sql = "SELECT * FROM users ORDER BY username DESC";
         sqLiteDatabase = this.getReadableDatabase();
-        List<Users> storeusers = new ArrayList<>();
+        List<User> storeusers = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
                 //String id=cursor.getString(0);
                 String name = cursor.getString(0);
                 String email = cursor.getString(1);
-                storeusers.add(new Users(name, email));
+                storeusers.add(new User(name, email));
             } while (cursor.moveToNext());
         }
         cursor.close();

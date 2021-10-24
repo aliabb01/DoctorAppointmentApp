@@ -6,20 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-    List<Users> user;
+    List<User> user;
     Context context;
     DBHelper db;
 
-    public UserAdapter(List<Users> user, Context context) {
+    public UserAdapter(List<User> user, Context context) {
         this.user = user;
         this.context = context;
 
@@ -40,7 +38,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Users userAdapter = user.get(position);
+        final User userAdapter = user.get(position);
         holder.userList_name.setText(userAdapter.getName());
         holder.userList_email.setText(userAdapter.getEmail());
     }
