@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoctorAppointmentApp">
         <activity
-            android:name=".doctor_service"
+            android:name=".DoctorService"
             android:exported="true" />
         <activity
             android:name=".ServicesList"

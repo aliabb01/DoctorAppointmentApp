@@ -1,7 +1,6 @@
 package ali.app.doctorappointmentapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +8,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.card.MaterialCardView;
+
 public class Doctor extends AppCompatActivity {
 
     DBHelper db;
 
 
     TextView welcome;
-    private CardView card_view;
+    private MaterialCardView card_view;
 
     private TextView userName;
+
+
 
 
     @Override
@@ -41,12 +44,12 @@ public class Doctor extends AppCompatActivity {
         welcome.setText("hello"+user.getName());*/
 
 
-        CardView card_view = (CardView) findViewById(R.id.service_doctor); // creating a CardView and assigning a value.
+        MaterialCardView card_view = (MaterialCardView) findViewById(R.id.profile_card_1); // creating a CardView and assigning a value.
 
         card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Doctor.this, doctor_service.class);
+                Intent intent = new Intent(Doctor.this, DoctorService.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
             }
