@@ -5,10 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.Editable;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -17,15 +19,24 @@ public class DBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, "App.db", null, 13);
+        super(context, "App.db", null, 6);
     }
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        MyDB.execSQL("create Table users(userId INTEGER primary key AUTOINCREMENT ,username TEXT ,role TEXT ,password TEXT ,email TEXT)");
-        MyDB.execSQL("create Table services(servicesId INTEGER primary key AUTOINCREMENT ,serviceName TEXT ,description TEXT)");
-
+        //MyDB.execSQL("PRAGMA foreign_keys=ON;");
+        MyDB.execSQL("create Table users(id INTEGER primary key AUTOINCREMENT ,username TEXT ,role TEXT ,password TEXT ,email TEXT)");
+        MyDB.execSQL("create Table services(servicesId INTEGER primary key AUTOINCREMENT, serviceName TEXT,description TEXT, user_id INTEGER,FOREIGN KEY (user_id) REFERENCES users (id))");
+       // MyDB.execSQL("PRAGMA foreign_keys=ON");
     }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        //enable foreign key constraints like ON UPDATE CASCADE, ON DELETE CASCADE
+        db.execSQL("PRAGMA foreign_keys=ON;");
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
@@ -39,7 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase MyDB = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
-            //  contentValues.put("userId", user.getUserId());
+           //  contentValues.put("userId", user.getId());
             contentValues.put("username", user.getName());
             contentValues.put("role", user.getRole());
             contentValues.put("password", user.getPassword());
@@ -52,12 +63,18 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
 
     }
+/// add the forginer key from users
+      /* public long lookonCreat(String name)
+       {
+           SQLiteDatabase MyDB = this.getWritableDatabase();
 
-    public Boolean insertServices(String serviceName,String description) {
+       }*/
+    public Boolean insertServices(String name, String desc,int user) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("serviceName", serviceName);
-        contentValues.put("description", description);
+        contentValues.put("serviceName", name);
+        contentValues.put("description", desc);
+        contentValues.put("user_id",user);
         long result = MyDB.insert("services", null, contentValues);
         if (result==-1) return false;
         else
@@ -80,7 +97,7 @@ public class DBHelper extends SQLiteOpenHelper {
             Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[]{username, password});
             if (cursor.moveToFirst()) {
                 user = new Users();
-                //        user.setUserId(cursor.getInt(0));
+              user.setUser_id(cursor.getInt(0));
                 user.setName(cursor.getString(1));
                 user.setRole(cursor.getString(2));
                 user.setPassword(cursor.getString(3));

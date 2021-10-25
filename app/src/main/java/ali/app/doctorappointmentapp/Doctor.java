@@ -1,6 +1,7 @@
 package ali.app.doctorappointmentapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,43 +20,33 @@ public class Doctor extends AppCompatActivity {
     private EditText serviceName;
     private EditText description;
     TextView welcome;
-
+       private CardView card_view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
-
-        /*submitService = findViewById(R.id.submitService);
-        serviceName = findViewById(R.id.serviceName);
-        description = findViewById(R.id.description);*/
-
-        db = new DBHelper(this);
-
-        /*welcome=findViewById(R.id.textView4);
         Intent intent=getIntent();
+        //  String name=intent.getStringExtra("user");
+
         Users user= (Users) intent.getSerializableExtra("user");
-        welcome.setText("hello"+user.getName());*/
 
-        /*submitService.setOnClickListener(new View.OnClickListener() {
+
+
+
+        CardView card_view = (CardView) findViewById(R.id.service_doctor); // creating a CardView and assigning a value.
+
+        card_view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String serviceNameLabel = serviceName.getText().toString();
-                String descriptionLabel = description.getText().toString();
+            public void onClick(View v) {
+                Intent intent=new Intent(Doctor.this, doctor_service.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+           }
+        });
 
-                if(serviceNameLabel.equals("") || descriptionLabel.equals("")) {
-                    Toast.makeText(Doctor.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    // if values are inserted
-                    Boolean insert = db.insertServices(serviceNameLabel, descriptionLabel);
-                    if(insert){
-                        Toast.makeText(Doctor.this, "Added successfully", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(Doctor.this, "Already added", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });*/
+
+
+
 
 
     }
