@@ -21,7 +21,7 @@ public class UserList extends AppCompatActivity {
         // recyclerView.setHasFixedSize(true);
 
         DBHelper db=new DBHelper(this);
-        List<Users> usersmodel=db.getuserList();
+        List<User> usersmodel=db.getuserList();
         if(usersmodel.size()>0) {
             UserAdapter usersadapter=new UserAdapter(usersmodel, UserList.this);
             recyclerView.setAdapter(usersadapter);

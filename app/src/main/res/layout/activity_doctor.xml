@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Doctor">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#2196F3"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="@+id/bottom_navigation"
+        app:srcCompat="@drawable/ic_add_24"
+        tools:ignore="SpeakableTextPresentCheck"
+        />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
         android:layout_width="wrap_content"
@@ -46,7 +59,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/doctor_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -60,16 +73,15 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/profile_card_1"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:layout_marginTop="-50dp"
+        android:clickable="true"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        android:clickable="true"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/service_doctor"
@@ -93,16 +105,15 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/profile_card_2"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:layout_marginTop="-50dp"
+        android:clickable="true"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        android:clickable="true"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -126,16 +137,15 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/profile_card_3"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="32dp"
+        android:clickable="true"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_card_1"
-        android:clickable="true"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/profile_card_1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -159,16 +169,15 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/profile_card_4"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="32dp"
+        android:clickable="true"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/profile_card_2"
-        android:clickable="true"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/profile_card_2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -200,18 +209,6 @@
         android:layout_height="wrap_content">
 
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="@+id/bottom_navigation"
-        app:layout_constraintHorizontal_bias="0.93"
-        app:layout_constraintStart_toStartOf="@+id/bottom_navigation"
-        app:srcCompat="@drawable/ic_add_24"
-        android:backgroundTint="#2196F3"
-        tools:ignore="SpeakableTextPresentCheck" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
