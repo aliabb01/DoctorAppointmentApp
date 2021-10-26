@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Doctor extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class Doctor extends AppCompatActivity {
 
     TextView welcome;
     private MaterialCardView card_view;
-
+    private FloatingActionButton  floatingActionButton;
     private TextView userName;
 
 
@@ -45,7 +46,7 @@ public class Doctor extends AppCompatActivity {
 
 
         MaterialCardView card_view = (MaterialCardView) findViewById(R.id.profile_card_1); // creating a CardView and assigning a value.
-
+        floatingActionButton=findViewById(R.id.addNewservice);
         card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +55,14 @@ public class Doctor extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+    floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Doctor.this, DoctorAddService.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+        }
+    });
 
     }
 

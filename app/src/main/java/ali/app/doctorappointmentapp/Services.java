@@ -1,26 +1,37 @@
 package ali.app.doctorappointmentapp;
 
 public class Services {
+    private Integer id;
     private String name;
     private String description;
-    private int user_id ;
+
+
+    public Services() {
+
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Services(Integer id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 
     public Services(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public Services() {
 
-    }
 
-    public int getUser_id() {
-        return user_id;
-    }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
 
     public String getName() {
         return name;
