@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +31,7 @@ public class Doctor extends AppCompatActivity {
     private MaterialCardView card_view;
     private FloatingActionButton  floatingActionButton;
     private TextView userName;
-
+    Boolean isopen=true;
 
 
 
@@ -58,6 +61,9 @@ public class Doctor extends AppCompatActivity {
 
         MaterialCardView card_view = (MaterialCardView) findViewById(R.id.profile_card_1); // creating a CardView and assigning a value.
         floatingActionButton=findViewById(R.id.addNewservice);
+          Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
+        floatingActionButton.setAnimation(animation);
+
         card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +71,9 @@ public class Doctor extends AppCompatActivity {
                 intent.putExtra("user", user);
                 startActivity(intent);
             }
+
         });
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +81,13 @@ public class Doctor extends AppCompatActivity {
                 /*Intent intent = new Intent(Doctor.this, DoctorAddService.class);
                 intent.putExtra("user", user);
                 startActivity(intent);*/
+               /* AlphaAnimation animation1 = new AlphaAnimation(1, 0);
+                animation1.setDuration(1000);
 
+                animation1.setFillAfter(true);
+                floatingActionButton.startAnimation(animation1);*/
+                Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+                floatingActionButton.setAnimation(animation);
                 MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(Doctor.this);
                 dialogBuilder.setTitle("Add a new service");
 
@@ -96,21 +110,24 @@ public class Doctor extends AppCompatActivity {
 
                         String serviceNameLabel = service_name.getText().toString();
                         String descriptionLabel = service_desc.getText().toString();
-                        User user= (User) intent.getSerializableExtra("user");
+                        User user = (User) intent.getSerializableExtra("user");
 
-                        if(serviceNameLabel.length()<=0 || descriptionLabel.length()<=0){
+                        if (serviceNameLabel.length() <= 0 || descriptionLabel.length() <= 0) {
                             Toast.makeText(Doctor.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Services services = new Services(serviceNameLabel, descriptionLabel);
 
 
-                            db.insertServices(services,user.getUser_id());
+                            db.insertServices(services, user.getUser_id());
                             Toast.makeText(Doctor.this, "done", Toast.LENGTH_SHORT).show();
 
-                           /// finish();
+                            /// finish();
                         }
-
                     }
+
+
+
+
                 });
 
                 dialogBuilder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
