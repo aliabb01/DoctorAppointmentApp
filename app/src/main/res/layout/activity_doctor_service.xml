@@ -8,11 +8,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_serviceDoctor"
-        android:layout_width="291dp"
-        android:layout_height="814dp"
+        android:layout_width="392dp"
+        android:layout_height="660dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.004" />
+        app:layout_constraintVertical_bias="0.774" />
 </androidx.constraintlayout.widget.ConstraintLayout>

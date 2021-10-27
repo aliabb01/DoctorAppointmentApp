@@ -34,6 +34,7 @@ public class DoctorService extends AppCompatActivity {
         Intent intent=getIntent();
       //  String name=intent.getStringExtra("user");
         recycle_serviceDoctor.setLayoutManager(new LinearLayoutManager(this));
+
         User user= (User) intent.getSerializableExtra("user");
         DBHelper db=new DBHelper(this);
         List<Services> servicesModel=db.getdoctorservice(user.getUser_id());

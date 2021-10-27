@@ -107,7 +107,7 @@ public class Doctor extends AppCompatActivity {
                             db.insertServices(services,user.getUser_id());
                             Toast.makeText(Doctor.this, "done", Toast.LENGTH_SHORT).show();
 
-                            finish();
+                           /// finish();
                         }
 
                     }
