@@ -38,6 +38,7 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:elevation="5dp"
+        app:strokeWidth="0dp"
         />
 
     <ImageView

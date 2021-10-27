@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class DoctorAddService extends AppCompatActivity {
     EditText doctorServicename,doctorServicedesc;
     DBHelper db;
-    Button doctor_addService;
+    /*Button doctor_addService;*/
     int i=7;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +24,11 @@ public class DoctorAddService extends AppCompatActivity {
 
            doctorServicename=findViewById(R.id.doctor_service_name);
            doctorServicedesc=findViewById(R.id.doctor_serviceDescrption);
-           doctor_addService=findViewById(R.id.addService);
+           /*doctor_addService=findViewById(R.id.addService);*/
         db = new DBHelper(this);
         Intent intent=getIntent();
         User user= (User) intent.getSerializableExtra("user");
-        doctor_addService.setOnClickListener(new View.OnClickListener() {
+        /*doctor_addService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -54,6 +54,6 @@ public class DoctorAddService extends AppCompatActivity {
 
 
             }
-        });
+        });*/
     }
 }
