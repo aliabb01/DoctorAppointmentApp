@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, "App.db", null, 6);
+        super(context, "App.db", null, 7);
     }
 
     @Override
@@ -70,18 +70,37 @@ public class DBHelper extends SQLiteOpenHelper {
            SQLiteDatabase MyDB = this.getWritableDatabase();
 
        }*/
-    public Boolean insertServices(String name, String desc, int user) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
+    public void insertServices(Services services, int user) {
+      //
         ContentValues contentValues = new ContentValues();
-        contentValues.put("serviceName", name);
-        contentValues.put("description", desc);
-        contentValues.put("user_id", user);
-        long result = MyDB.insert("services", null, contentValues);
-        if (result == -1) return false;
-        else
-            return true;
-    }
 
+
+        contentValues.put("serviceName", services.getName());
+        contentValues.put("description", services.getDescription());
+        contentValues.put("user_id", user);
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        MyDB.insert("services", null, contentValues);
+
+    }
+    ///get services belognTo doctor
+    public List<Services>getdoctorservice(int user){
+        String sql = "select servicesId,serviceName,description from services where user_id ="+user;
+        sqLiteDatabase = this.getReadableDatabase();
+        List<Services> storeServices = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                //String id=cursor.getString(0);
+                int i=Integer.parseInt(cursor.getString(0));
+                String serviceName = cursor.getString(1);
+                String description = cursor.getString(2);
+
+                storeServices.add(new Services(i,serviceName, description));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return storeServices;
+    }
     public Boolean checkusername(String username) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
@@ -90,6 +109,22 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+
+    ////delete service
+
+  public  void deleteService(int id){
+
+       sqLiteDatabase = this.getWritableDatabase();
+sqLiteDatabase.delete("services","servicesId=?",new String[]{String.valueOf(id)});
+   }
+  // update service details
+     public  void updateService(Services services){
+        ContentValues contentValues=new ContentValues();
+        contentValues.put("serviceName",services.getName());
+        contentValues.put("description",services.getDescription());
+        sqLiteDatabase=this.getWritableDatabase();
+        sqLiteDatabase.update("services",contentValues,"servicesId"+" =?",new String[]{String.valueOf(services.getId())});
+     }
 
     public User checkusernamepassword(String username, String password) {
         User user = null;
@@ -144,6 +179,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return storeusers;
     }
 
+
     public List<Services> getServiceList() {
         String sql = "select * from services";
         sqLiteDatabase = this.getReadableDatabase();
@@ -152,9 +188,11 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 //String id=cursor.getString(0);
+               // int i=Integer.parseInt(cursor.getString(0));
                 String serviceName = cursor.getString(0);
                 String description = cursor.getString(1);
-                storeServices.add(new Services(serviceName, description));
+
+                storeServices.add(new Services(serviceName,description));
             } while (cursor.moveToNext());
         }
         cursor.close();

@@ -2,6 +2,9 @@ package ali.app.doctorappointmentapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,27 +15,40 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class DoctorService extends AppCompatActivity {
 
-    EditText doctorServicename,doctorServicedesc;
-    TextView we;
-    Button doctor_addService;
+
+    RecyclerView recycle_serviceDoctor;
     DBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_service);
-
-        doctorServicename=findViewById(R.id.doctor_service_name);
-        doctorServicedesc=findViewById(R.id.doctor_serviceDescrption);
-        doctor_addService=findViewById(R.id.addService);
+        recycle_serviceDoctor=findViewById(R.id.recycle_serviceDoctor);
+     //   doctorServicename=findViewById(R.id.doctor_service_name);
+     //   doctorServicedesc=findViewById(R.id.doctor_serviceDescrption);
+      //  doctor_addService=findViewById(R.id.addService);
         db = new DBHelper(this);
         Intent intent=getIntent();
       //  String name=intent.getStringExtra("user");
-
+        recycle_serviceDoctor.setLayoutManager(new LinearLayoutManager(this));
         User user= (User) intent.getSerializableExtra("user");
+        DBHelper db=new DBHelper(this);
+        List<Services> servicesModel=db.getdoctorservice(user.getUser_id());
+        if(servicesModel.size()>0) {
+            DoctorServicesAdapter servicesAdapter=new DoctorServicesAdapter(servicesModel, DoctorService.this);
+            recycle_serviceDoctor.setAdapter(servicesAdapter);
 
-        doctor_addService.setOnClickListener(new View.OnClickListener() {
+        }
+        else {
+            Toast.makeText(this, "no item", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+       /* doctor_addService.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
 
@@ -67,7 +83,7 @@ public class DoctorService extends AppCompatActivity {
              }
 
          }
-     });
+     });*/
 
     }
 }

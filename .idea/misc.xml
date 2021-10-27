@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/APP_devlopment/app/src/main/res/layout/activity_doctor.xml" value="0.4" />
-        <entry key="..\:/APP_devlopment/app/src/main/res/layout/activity_doctor_service.xml" value="0.25416666666666665" />
+        <entry key="..\:/APP_devlopment/app/src/main/res/layout/activity_doctor_add_service.xml" value="0.171875" />
+        <entry key="..\:/APP_devlopment/app/src/main/res/layout/activity_doctor_service.xml" value="0.13950829045168667" />
         <entry key="..\:/APP_devlopment/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/APP_devlopment/app/src/main/res/layout/activity_sign_in.xml" value="0.12135416666666667" />
         <entry key="..\:/APP_devlopment/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/APP_devlopment/app/src/main/res/layout/doctor_service_list.xml" value="0.264" />
         <entry key="..\:/Android-Development/DoctorAppointmentApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3828125" />
         <entry key="..\:/Android-Development/DoctorAppointmentApp/app/src/main/res/drawable/ic_add_24.xml" value="0.3828125" />
         <entry key="..\:/Android-Development/DoctorAppointmentApp/app/src/main/res/drawable/ic_home_24.xml" value="0.3828125" />
