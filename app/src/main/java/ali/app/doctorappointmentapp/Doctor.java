@@ -61,7 +61,7 @@ public class Doctor extends AppCompatActivity {
 
         MaterialCardView card_view = (MaterialCardView) findViewById(R.id.profile_card_1); // creating a CardView and assigning a value.
         floatingActionButton=findViewById(R.id.addNewservice);
-          Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
+          Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
         floatingActionButton.setAnimation(animation);
 
         card_view.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +86,7 @@ public class Doctor extends AppCompatActivity {
 
                 animation1.setFillAfter(true);
                 floatingActionButton.startAnimation(animation1);*/
-                Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+                Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
                 floatingActionButton.setAnimation(animation);
                 MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(Doctor.this);
                 dialogBuilder.setTitle("Add a new service");
