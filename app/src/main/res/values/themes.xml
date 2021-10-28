@@ -7,7 +7,7 @@
         <!-- FullScreen for weird camera fix -->
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>

@@ -17,11 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /**
-         * Remove title on top
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();*/
-
         setContentView(R.layout.activity_main);
 
         btnSignIn = findViewById(R.id.btnSignIn);

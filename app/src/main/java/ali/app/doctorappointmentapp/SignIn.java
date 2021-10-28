@@ -1,10 +1,12 @@
 package ali.app.doctorappointmentapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,10 +18,15 @@ public class SignIn extends AppCompatActivity {
     Button signinButton, signUpBtn;
     DBHelper db;
 
+    ConstraintLayout signInLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        signInLayout = (ConstraintLayout)findViewById(R.id.signInLayout);
+
         userSignin = findViewById(R.id.nameUser);
         passwordSignin = findViewById(R.id.password);
         signinButton = findViewById(R.id.signIn_btnSignIn);
@@ -84,6 +91,14 @@ public class SignIn extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Close keyboard on form submit
+                try {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+
                 Intent intent = new Intent(getApplicationContext(), SignUp.class);
                 startActivity(intent);
             }

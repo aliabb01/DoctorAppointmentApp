@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +32,8 @@ public class Doctor extends AppCompatActivity {
     private MaterialCardView card_view;
     private FloatingActionButton  floatingActionButton;
     private TextView userName;
+    private ImageButton profileIcon;
     Boolean isopen=true;
-
 
 
     @Override
@@ -48,7 +49,7 @@ public class Doctor extends AppCompatActivity {
 
 
         userName = findViewById(R.id.doctor_username);
-
+        profileIcon = findViewById(R.id.doctor_profileIcon);
 
         userName.setText(user.getName());
 
@@ -139,6 +140,15 @@ public class Doctor extends AppCompatActivity {
 
                 dialogBuilder.show();
 
+            }
+        });
+
+        profileIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Doctor.this, Profile.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
             }
         });
 
