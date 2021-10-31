@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -13,9 +14,15 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -74,7 +81,44 @@ public class Doctor extends AppCompatActivity {
             }
 
         });
+        /**
+         * Get random image from calling api https://picsum.photos/200/300
+         * */
+        String url="";
+        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/200/300", new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                profileIcon.setImageBitmap(response);
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Doctor.this,"something wrong",Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+            }
+        });
+        MySingleton.getInstance(Doctor.this).addRequest(imageRequest);
 
+       /* RequestQueue requestQueue= Volley.newRequestQueue(this);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url="";
+                ImageRequest imageRequest=new ImageRequest("https://picsum.photos/200/300", new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        profileIcon.setImageBitmap(response);
+                    }
+                }, 0, 0, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Doctor.this,"something wrong",Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                });
+                MySingleton.getInstance(Doctor.this).addRequest(imageRequest);
+            }
+        });*/
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
