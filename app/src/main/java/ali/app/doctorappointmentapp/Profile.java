@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.shape.CornerFamily;
 
 public class Profile extends AppCompatActivity {
 
@@ -28,27 +29,32 @@ public class Profile extends AppCompatActivity {
     private TextView role;
 
     private ImageButton goBackBtn;
-    private ShapeableImageView imageView3;
+    private ImageView imageView3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-    imageView3=findViewById(R.id.imageView3);
+        imageView3=findViewById(R.id.profileImageChild);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         String url="";
-        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/200/300", new Response.Listener<Bitmap>() {
+        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/300", new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
                 imageView3.setImageBitmap(response);
             }
-        }, 0, 0, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
+        }, 300, 300, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Profile.this,"something wrong",Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });
+
+/*        imageView3.setShapeAppearanceModel(imageView3.getShapeAppearanceModel()
+        .toBuilder().setAllCorners(CornerFamily.ROUNDED, 300).build());*/
+
         MySingleton.getInstance(Profile.this).addRequest(imageRequest);
 
 
