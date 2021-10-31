@@ -1,13 +1,23 @@
 package ali.app.doctorappointmentapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.imageview.ShapeableImageView;
 
 public class Profile extends AppCompatActivity {
 
@@ -18,11 +28,31 @@ public class Profile extends AppCompatActivity {
     private TextView role;
 
     private ImageButton goBackBtn;
+    private ShapeableImageView imageView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+    imageView3=findViewById(R.id.imageView3);
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        String url="";
+        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/200/300", new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                imageView3.setImageBitmap(response);
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Profile.this,"something wrong",Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+            }
+        });
+        MySingleton.getInstance(Profile.this).addRequest(imageRequest);
+
+
+
         Intent intent = getIntent();
 
         db = new DBHelper(this);
@@ -39,6 +69,8 @@ public class Profile extends AppCompatActivity {
         name.setText(user.getName());
         email.setText(user.getEmail());
         role.setText(user.getRole());
+
+
 
         goBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
