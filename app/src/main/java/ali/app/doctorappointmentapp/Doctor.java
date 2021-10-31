@@ -39,7 +39,7 @@ public class Doctor extends AppCompatActivity {
     private MaterialCardView card_view;
     private FloatingActionButton  floatingActionButton;
     private TextView userName;
-    private ImageButton profileIcon;
+    private ImageView profileIcon;
     Boolean isopen=true;
 
 
@@ -69,7 +69,7 @@ public class Doctor extends AppCompatActivity {
 
         MaterialCardView card_view = (MaterialCardView) findViewById(R.id.profile_card_1); // creating a CardView and assigning a value.
         floatingActionButton=findViewById(R.id.addNewservice);
-          Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+        Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
         floatingActionButton.setAnimation(animation);
 
         card_view.setOnClickListener(new View.OnClickListener() {
@@ -85,12 +85,12 @@ public class Doctor extends AppCompatActivity {
          * Get random image from calling api https://picsum.photos/200/300
          * */
         String url="";
-        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/200/300", new Response.Listener<Bitmap>() {
+        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/300", new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
                 profileIcon.setImageBitmap(response);
             }
-        }, 0, 0, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
+        }, 300, 300, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Doctor.this,"something wrong",Toast.LENGTH_SHORT).show();
