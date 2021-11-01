@@ -4,9 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home">
+    tools:context=".Doctor">
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/profile_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingClass">
+
+
+        <TextView
+            android:id="@+id/welcome_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="12dp"
+            android:text="Username"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@+id/profileImageuser"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profileImageuser"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="100dp"
+            app:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/welcome_user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/welcome_user">
+
+            <ImageView
+                android:id="@+id/patient_profileIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitEnd"
+                app:layout_constraintBottom_toBottomOf="@+id/doctor_username"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/doctor_username"
+                app:srcCompat="@drawable/ic_baseline_person_24"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="176dp"
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@+id/autoComplete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/autoComplete"
+            app:layout_constraintVertical_bias="0.416" />
+
+        <AutoCompleteTextView
+            android:id="@+id/autoComplete"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:hint="Search"
+            app:layout_constraintBottom_toBottomOf="@+id/profileImageuser"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profileImageuser"
+            app:layout_constraintVertical_bias="0.0" />
+        <!-- <com.mancj.materialsearchbar.MaterialSearchBar
+             android:id="@+id/search"
+             android:layout_width="204dp"
+             android:layout_height="163dp"
+             android:layout_marginStart="4dp"
+             android:layout_marginTop="44dp"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             app:mt_speechMode="false"
+             app:mt_hint="Search" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -20,161 +97,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/doctor_bottom_navigation_menu" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/profile_card_2"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginTop="-50dp"
-        android:layout_marginEnd="8dp"
-        android:clickable="true"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/usr_appointment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Appointments"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/profile_card_1"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="-50dp"
-        android:clickable="true"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/user_service"
-                android:layout_width="153dp"
-                android:layout_height="31dp"
-                android:text="Find doctor/service"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/profile_card_3"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:clickable="true"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_card_1">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/usr_report"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Report a problem"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@drawable/profile_top"
+        android:id="@+id/constraintLayout1"
+        android:layout_width="411dp"
+        android:layout_height="388dp"
+
+        android:layout_marginTop="220dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingClass">
 
-        <TextView
-            android:id="@+id/user_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="My Profile"
-            android:textColor="#FFFFFF"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.239" />
-
-
-        <TextView
-            android:id="@+id/welcome_user"
-            android:layout_width="75dp"
-            android:layout_height="53dp"
-            android:layout_marginEnd="76dp"
-            android:text="Username"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_servcies"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-
-            app:layout_constraintStart_toEndOf="@+id/user_profile"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.409" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/patient_profileIcon"
-            android:layout_width="68dp"
-            android:layout_height="61dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:background="#E5E5E5"
-            android:scaleType="centerCrop"
-            app:contentPadding="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/welcome_user"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.31"
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-            app:srcCompat="@drawable/ic_baseline_person_24" />
-
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
