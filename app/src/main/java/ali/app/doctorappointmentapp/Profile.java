@@ -39,7 +39,13 @@ public class Profile extends AppCompatActivity {
         imageView3=findViewById(R.id.profileImageChild);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         String url="";
-        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/300", new Response.Listener<Bitmap>() {
+
+        Intent intent = getIntent();
+        db = new DBHelper(this);
+        User user = (User) intent.getSerializableExtra("user");
+        Log.d("Tag", "onCreate: " + user);
+
+        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/id/" + String.valueOf(user.getUser_id()) + "/300/300", new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
                 imageView3.setImageBitmap(response);
@@ -57,15 +63,6 @@ public class Profile extends AppCompatActivity {
 
         MySingleton.getInstance(Profile.this).addRequest(imageRequest);
 
-
-
-        Intent intent = getIntent();
-
-        db = new DBHelper(this);
-
-        User user = (User) intent.getSerializableExtra("user");
-
-        Log.d("Tag", "onCreate: " + user);
 
         name = findViewById(R.id.profile_nameLabel);
         email = findViewById(R.id.profile_about_email);

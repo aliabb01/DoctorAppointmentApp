@@ -85,7 +85,7 @@ public class Doctor extends AppCompatActivity {
          * Get random image from calling api https://picsum.photos/200/300
          * */
         String url="";
-        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/300", new Response.Listener<Bitmap>() {
+        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/id/" + String.valueOf(user.getUser_id()) + "/300/300", new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
                 profileIcon.setImageBitmap(response);
