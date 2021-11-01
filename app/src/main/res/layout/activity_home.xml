@@ -19,38 +19,37 @@
         tools:ignore="MissingClass">
 
 
-        <TextView
-            android:id="@+id/welcome_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="12dp"
-            android:text="Username"
-            android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toStartOf="@+id/profileImageuser"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/profileImageuser"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_marginEnd="16dp"
             app:cardCornerRadius="100dp"
             app:cardElevation="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/welcome_user"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/welcome_user">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/patient_profileIcon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitEnd"
-                app:layout_constraintBottom_toBottomOf="@+id/doctor_username"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/doctor_username"
                 app:srcCompat="@drawable/ic_baseline_person_24"
                 tools:ignore="SpeakableTextPresentCheck" />
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/welcome_user"
+            android:layout_width="68dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="12dp"
+            android:text="Username"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/profileImageuser"
+            app:layout_constraintTop_toTopOf="@+id/profileImageuser"
+            app:layout_constraintVertical_bias="0.27" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -66,12 +65,14 @@
             android:id="@+id/autoComplete"
             android:layout_width="200dp"
             android:layout_height="48dp"
-            android:layout_marginStart="16dp"
             android:hint="Search"
-            app:layout_constraintBottom_toBottomOf="@+id/profileImageuser"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.075"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/profileImageuser"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.689" />
+
         <!-- <com.mancj.materialsearchbar.MaterialSearchBar
              android:id="@+id/search"
              android:layout_width="204dp"

@@ -25,7 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.mancj.materialsearchbar.MaterialSearchBar;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class Home extends AppCompatActivity {
        /**
         * Add the service Adapter from servcieAdapter class and check if its not empty
         * */
-        user_servcies.setLayoutManager(new GridLayoutManager(this,3));
+        user_servcies.setLayoutManager(new GridLayoutManager(this,2));
         user_servcies.setHasFixedSize(true);
         DBHelper db=new DBHelper(this);
         List<Services> servicesModel=db.getServiceList();
