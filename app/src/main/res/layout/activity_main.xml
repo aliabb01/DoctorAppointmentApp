@@ -4,7 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/brandName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="doctor.json"
+        app:lottie_loop="true" />
 
     <TextView
         android:id="@+id/brandName"
@@ -41,7 +56,7 @@
         app:strokeWidth="0dp"
         />
 
-    <ImageView
+   <!-- <ImageView
         android:id="@+id/brandLogo"
         android:layout_width="149dp"
         android:layout_height="146dp"
@@ -49,7 +64,8 @@
         app:layout_constraintBottom_toTopOf="@+id/brandName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.864" />-->
 
     <Button
         android:id="@+id/btnSignUp"

@@ -6,28 +6,36 @@
     android:layout_height="150dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="233dp"
-        android:layout_height="134dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="411dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:descendantFocusability="blocksDescendants"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/admin_serviceName"
-            android:layout_width="171dp"
-            android:layout_height="32dp"
+            android:layout_width="388dp"
+            android:layout_height="31dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
-            android:text="" />
+            android:textStyle="bold"
+            android:fontFamily="@font/source_sans_pro_bold"
+            android:text=""
+            android:textSize="20sp"
+            android:layout_marginBottom="7dp"/>
 
         <TextView
             android:id="@+id/admin_serviceDescription"
-            android:layout_width="171dp"
+            android:layout_width="388dp"
             android:layout_height="69dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="65dp"
+            android:textStyle="normal"
+            android:textSize="15sp"
+
             android:text="" />
 
 
