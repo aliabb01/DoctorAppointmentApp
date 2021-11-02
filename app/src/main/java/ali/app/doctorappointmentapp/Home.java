@@ -52,7 +52,7 @@ public class Home extends AppCompatActivity {
        /**
         * Add the service Adapter from servcieAdapter class and check if its not empty
         * */
-        user_servcies.setLayoutManager(new GridLayoutManager(this,2));
+        user_servcies.setLayoutManager(new LinearLayoutManager(this));
         user_servcies.setHasFixedSize(true);
         DBHelper db=new DBHelper(this);
         List<Services> servicesModel=db.getServiceList();
@@ -71,7 +71,7 @@ public class Home extends AppCompatActivity {
          * GET randrom image from picsum Api
          * */
         String url="";
-        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/200/300", new Response.Listener<Bitmap>() {
+        ImageRequest imageRequest=new ImageRequest("https://picsum.photos/id/" + String.valueOf(user.getUser_id()) + "/300/300", new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
                 patient_profileIcon.setImageBitmap(response);
