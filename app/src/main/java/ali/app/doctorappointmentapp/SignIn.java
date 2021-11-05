@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class SignIn extends AppCompatActivity {
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Loading loading=new Loading(SignIn.this);
                 String userlogin = userSignin.getText().toString();
                 String pass = passwordSignin.getText().toString();
                 db = new DBHelper(getApplicationContext());
@@ -49,39 +51,56 @@ public class SignIn extends AppCompatActivity {
                     } else {
                         Toast.makeText(SignIn.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
                         String checkRole = db.checkusernamepasswordrole(userlogin, pass);
-                        //Log.d("myTag", "onClick: CHECKROLE IS: " + checkRole);
-                        if (checkRole != "") {
-                            //String na= db.seedetails(user);
+                        loading.buttonActivied();
+                        final Handler handler=new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                loading.buttondone();
+                                Handler handler1=new Handler();
+                                handler1.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (checkRole != "") {
+                                            //String na= db.seedetails(user);
 
-                            // Log.d("myTag", "onClick: ID: " + na);
-                            switch (checkRole) {
-                                case "Patient":
-                                    Intent intent = new Intent(SignIn.this, Home.class);
-                                    intent.putExtra("user", user);
+                                            // Log.d("myTag", "onClick: ID: " + na);
+                                            switch (checkRole) {
+                                                case "Patient":
+                                                    Intent intent = new Intent(SignIn.this, Home.class);
+                                                    intent.putExtra("user", user);
 
-                                    startActivity(intent);
-                                    break;
-                                case "Doctor":
-                                    Intent intentDoc = new Intent(SignIn.this, Doctor.class);
-                                    intentDoc.putExtra("user", user);
-                                    startActivity(intentDoc);
-                                    break;
-                                case "Admin":
-                                    Intent intent1 = new Intent(SignIn.this, Admin.class);
-                                    intent1.putExtra("user", user);
-                                    startActivity(intent1);
-                                    break;
-                                default:
-                                    Toast.makeText(SignIn.this, "no no ", Toast.LENGTH_SHORT).show();
-                                    break;
+                                                    startActivity(intent);
+                                                    break;
+                                                case "Doctor":
+                                                    Intent intentDoc = new Intent(SignIn.this, Doctor.class);
+                                                    intentDoc.putExtra("user", user);
+                                                    startActivity(intentDoc);
+                                                    break;
+                                                case "Admin":
+                                                    Intent intent1 = new Intent(SignIn.this, Admin.class);
+                                                    intent1.putExtra("user", user);
+                                                    startActivity(intent1);
+                                                    break;
+                                                default:
+                                                    Toast.makeText(SignIn.this, "no no ", Toast.LENGTH_SHORT).show();
+                                                    break;
+                                            }
+
+
+                                            Toast.makeText(SignIn.this, "Welcome " + user.getName(), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(SignIn.this, "please check your role", Toast.LENGTH_SHORT).show();
+
+                                        }
+
+                                    }
+                                },0);
+
                             }
+                        },300);
+                        //Log.d("myTag", "onClick: CHECKROLE IS: " + checkRole);
 
-
-                            Toast.makeText(SignIn.this, "Welcome " + user.getName(), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(SignIn.this, "please check your role", Toast.LENGTH_SHORT).show();
-
-                        }
 
                     }
                 }
