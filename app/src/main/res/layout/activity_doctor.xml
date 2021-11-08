@@ -73,7 +73,7 @@
             <ImageView
                 android:id="@+id/doctor_profileIcon"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="51dp"
                 android:scaleType="fitEnd"
                 app:layout_constraintBottom_toBottomOf="@+id/doctor_username"
                 app:layout_constraintEnd_toEndOf="parent"
