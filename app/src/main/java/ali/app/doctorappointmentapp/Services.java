@@ -1,11 +1,27 @@
 package ali.app.doctorappointmentapp;
 
-public class Services {
+import java.io.Serializable;
+
+public class Services implements Serializable {
     private Integer id;
     private String name;
     private String description;
+    private Integer user_id;
 
+    public Services(Integer id, String name, String description, Integer user_id) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.user_id = user_id;
+    }
 
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
 
     public Services() {
 

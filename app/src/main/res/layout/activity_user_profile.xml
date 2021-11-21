@@ -64,6 +64,17 @@
             app:srcCompat="@drawable/ic_baseline_keyboard_arrow_left_36"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
+        <Button
+            android:id="@+id/history"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="My appointment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--<com.google.android.material.imageview.ShapeableImageView

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ public class Profile extends AppCompatActivity {
     private TextView role;
 
     private ImageButton goBackBtn;
+    private Button history;
     private ImageView imageView3;
 
 
@@ -37,6 +39,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         imageView3=findViewById(R.id.profileImageChild);
+        history=findViewById(R.id.history);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         String url="";
 
@@ -79,6 +82,18 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+        /**
+         *
+         * see the history of user
+         * */
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this, MyHistory.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
             }
         });
 
