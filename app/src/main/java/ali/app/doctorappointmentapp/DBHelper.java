@@ -1,18 +1,16 @@
 package ali.app.doctorappointmentapp;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteQueryBuilder;
-import android.text.Editable;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
 
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -21,14 +19,17 @@ public class DBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, "App.db", null, 10);
+        super(context, "App.db", null, 6);
     }
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
         //MyDB.execSQL("PRAGMA foreign_keys=ON;");
         MyDB.execSQL("create Table users(id INTEGER primary key AUTOINCREMENT ,username TEXT ,role TEXT ,password TEXT ,email TEXT)");
-        MyDB.execSQL("create Table services(servicesId INTEGER primary key AUTOINCREMENT, serviceName TEXT,description TEXT, user_id INTEGER,FOREIGN KEY (user_id) REFERENCES users (id))");
+        MyDB.execSQL("create Table services(id INTEGER primary key AUTOINCREMENT, serviceName TEXT,description TEXT, user_id INTEGER,FOREIGN KEY (user_id) REFERENCES users (id))");
+        MyDB.execSQL("CREATE TABLE appointments (id INTEGER primary key autoincrement NOT NULL,date TEXT,time TEXT,servicesId INTEGER,user_id INTEGER,FOREIGN KEY (servicesId) REFERENCES services (id),FOREIGN KEY (user_id) REFERENCES users (id))");
+
+
         // MyDB.execSQL("PRAGMA foreign_keys=ON");
     }
 
@@ -66,6 +67,23 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    /****
+     *inset appointment
+     *
+     */
+     public  void insertAppointment(Appointment appointment,int service,int user)
+     {
+         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+         SimpleDateFormat simpleDateFormat1=new SimpleDateFormat("HH:mm");
+         ContentValues contentValues=new ContentValues();
+         contentValues.put("date", simpleDateFormat.format(appointment.getDate()));
+         contentValues.put("time",appointment.getTime());
+         contentValues.put("servicesId",service);
+         contentValues.put("user_id", user);
+         SQLiteDatabase MyDB = this.getWritableDatabase();
+         MyDB.insert("appointments", null, contentValues);
+
+     }
     /**
      * insert new service
      */
@@ -87,7 +105,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * get the services belogto specifies  doctor
      */
     public List<Services> getdoctorservice(int user) {
-        String sql = "select servicesId,serviceName,description from services where user_id =" + user;
+        String sql = "select id,serviceName,description from services where user_id =" + user;
         sqLiteDatabase = this.getReadableDatabase();
         List<Services> storeServices = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
@@ -99,6 +117,70 @@ public class DBHelper extends SQLiteOpenHelper {
                 String description = cursor.getString(2);
 
                 storeServices.add(new Services(i, serviceName, description));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return storeServices;
+    }
+
+    /**
+     * get service
+     * */
+    public List<Services> getService(int id) {
+        String sql = "select id,serviceName,description,user_id from services where id =" + id;
+        sqLiteDatabase = this.getReadableDatabase();
+        List<Services> storeServices = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                //String id=cursor.getString(0);
+            //    int i = Integer.parseInt(cursor.getString(0));
+                int service_id=cursor.getInt(0);
+                String serviceName = cursor.getString(1);
+                String description = cursor.getString(2);
+                int user_id=cursor.getInt(3);
+
+                storeServices.add(new Services(service_id,serviceName, description,user_id));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return storeServices;
+    }
+     /**
+      * history service details
+      *
+      * @return*/
+     public String getServicehistory(int id) {
+         SQLiteDatabase MyDB = this.getWritableDatabase();
+         Cursor cursor = MyDB.rawQuery("Select serviceName  from services where id = ?", new String[]{String.valueOf(id)});
+         cursor.moveToFirst();
+         String servicename = cursor.getString(0);
+         return servicename;
+     }
+
+
+    /**
+     * get appointment list
+     * */
+    public List<Appointment> getappointment(int id) {
+        String sql = "select date,time,servicesId from appointments where user_id =" + id;
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        sqLiteDatabase = this.getReadableDatabase();
+        List<Appointment> storeServices = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                //String id=cursor.getString(0);
+                //    int i = Integer.parseInt(cursor.getString(0));
+
+             try{
+                 Date date = simpleDateFormat.parse(cursor.getString(0));
+                String time = cursor.getString(1);
+                int service = Integer.parseInt(cursor.getString(2));
+                storeServices.add(new Appointment(date,time,service));
+             }catch (Exception e){
+                 return null;
+             }
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -229,11 +311,11 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 //String id=cursor.getString(0);
-                // int i=Integer.parseInt(cursor.getString(0));
+                int i=cursor.getInt(0);
                 String serviceName = cursor.getString(1);
                 String description = cursor.getString(2);
 
-                storeServices.add(new Services(serviceName, description));
+                storeServices.add(new Services(i,serviceName, description));
             } while (cursor.moveToNext());
         }
         cursor.close();

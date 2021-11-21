@@ -45,6 +45,9 @@ public class Home extends AppCompatActivity {
         patient_profileIcon=findViewById(R.id.patient_profileIcon);
         autoComplete=findViewById(R.id.autoComplete);
         user_servcies=findViewById(R.id.user_servcies);
+        Intent intent = getIntent();
+        User user = (User) intent.getSerializableExtra("user");
+        welcome.setText(user.getName());
         /**
          * call loadResult method to display the result in the autocompletetext
          * */
@@ -56,17 +59,20 @@ public class Home extends AppCompatActivity {
         user_servcies.setHasFixedSize(true);
         DBHelper db=new DBHelper(this);
         List<Services> servicesModel=db.getServiceList();
+
         if(servicesModel.size()>0) {
-            ServicesAdapter servicesAdapter=new ServicesAdapter(servicesModel, Home.this);
+            ServicesAdapter servicesAdapter=new ServicesAdapter(servicesModel,Home.this);
             user_servcies.setAdapter(servicesAdapter);
+
 
         }
         else {
             Toast.makeText(this, "no item", Toast.LENGTH_SHORT).show();
         }
-        Intent intent = getIntent();
-        User user = (User) intent.getSerializableExtra("user");
-        welcome.setText(user.getName());
+
+
+
+
         /**
          * GET randrom image from picsum Api
          * */
@@ -90,6 +96,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Home.this, Profile.class);
                 intent.putExtra("user", user);
+
                 startActivity(intent);
             }
         });
