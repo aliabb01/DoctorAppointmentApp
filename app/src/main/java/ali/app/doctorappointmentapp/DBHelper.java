@@ -27,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //MyDB.execSQL("PRAGMA foreign_keys=ON;");
         MyDB.execSQL("create Table users(id INTEGER primary key AUTOINCREMENT ,username TEXT ,role TEXT ,password TEXT ,email TEXT)");
         MyDB.execSQL("create Table services(id INTEGER primary key AUTOINCREMENT, serviceName TEXT,description TEXT, user_id INTEGER,FOREIGN KEY (user_id) REFERENCES users (id))");
-        MyDB.execSQL("CREATE TABLE appointments (id INTEGER primary key autoincrement NOT NULL,date TEXT,time TEXT,servicesId INTEGER,user_id INTEGER,FOREIGN KEY (servicesId) REFERENCES services (id),FOREIGN KEY (user_id) REFERENCES users (id))");
+        MyDB.execSQL("CREATE TABLE appointments (id INTEGER primary key autoincrement NOT NULL,date TEXT,time TEXT,servicesId INTEGER,user_id INTEGER,FOREIGN KEY (servicesId) REFERENCES services (id) ON DELETE CASCADE,FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE)");
 
 
         // MyDB.execSQL("PRAGMA foreign_keys=ON");
@@ -84,14 +84,21 @@ public class DBHelper extends SQLiteOpenHelper {
          MyDB.insert("appointments", null, contentValues);
 
      }
+     /**
+      * delete appointment
+      * */
+     public void cancelappointment(int id) {
+         sqLiteDatabase = this.getWritableDatabase();
+         sqLiteDatabase.delete("appointments", "id=?", new String[]{String.valueOf(id)});
+     }
+
+
     /**
      * insert new service
      */
     public void insertServices(Services services, int user) {
         //
         ContentValues contentValues = new ContentValues();
-
-
         contentValues.put("serviceName", services.getName());
         contentValues.put("description", services.getDescription());
         contentValues.put("user_id", user);
@@ -99,7 +106,7 @@ public class DBHelper extends SQLiteOpenHelper {
         MyDB.insert("services", null, contentValues);
 
     }
-    ///get services belognTo doctor
+
 
     /**
      * get the services belogto specifies  doctor
@@ -158,7 +165,26 @@ public class DBHelper extends SQLiteOpenHelper {
          return servicename;
      }
 
-
+     /**
+      * get user name in the appointment
+      * */
+      public String getuserName(int id){
+          SQLiteDatabase MyDB = this.getWritableDatabase();
+          Cursor cursor = MyDB.rawQuery("Select username  from users where id = ?", new String[]{String.valueOf(id)});
+          cursor.moveToFirst();
+          String name = cursor.getString(0);
+          return name;
+      }
+      /**
+       * get doctor id
+       * */
+      public Integer getdoctorname(int id){
+          SQLiteDatabase MyDB = this.getWritableDatabase();
+          Cursor cursor = MyDB.rawQuery("Select id  from services where user_id = ?", new String[]{String.valueOf(id)});
+          cursor.moveToFirst();
+          int servicename = cursor.getInt(0);;
+          return servicename;
+      }
     /**
      * get appointment list
      * */
@@ -186,6 +212,33 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return storeServices;
     }
+    public List<Appointment> getappointments(int service) {
+
+        String sql = "select id,date,time,user_id from appointments where servicesId =" + service;
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        sqLiteDatabase = this.getReadableDatabase();
+        List<Appointment> storeServices = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                //String id=cursor.getString(0);
+                //    int i = Integer.parseInt(cursor.getString(0));
+
+                try{
+                    int id=Integer.parseInt(cursor.getString(0));
+                    Date date = simpleDateFormat.parse(cursor.getString(1));
+                    String time = cursor.getString(2);
+                    int user = Integer.parseInt(cursor.getString(3));;
+                    storeServices.add(new Appointment(id,date,time,user));
+                }catch (Exception e){
+                    return null;
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return storeServices;
+    }
+
 
     public Boolean checkusername(String username) {
         SQLiteDatabase MyDB = this.getWritableDatabase();

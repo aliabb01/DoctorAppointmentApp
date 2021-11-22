@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoctorAppointmentApp">
         <activity
+            android:name=".DoctorAppointment"
+            android:exported="true" />
+        <activity
             android:name=".MyHistory"
             android:exported="true" />
         <activity

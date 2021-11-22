@@ -68,10 +68,15 @@ public class Doctor extends AppCompatActivity {
 
 
         MaterialCardView card_view = (MaterialCardView) findViewById(R.id.profile_card_1); // creating a CardView and assigning a value.
+
+        MaterialCardView doctorAppointment = (MaterialCardView) findViewById(R.id.profile_card_2);
+
         floatingActionButton=findViewById(R.id.addNewservice);
         Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
         floatingActionButton.setAnimation(animation);
-
+        /**
+         * doctor see his service
+         * */
         card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,8 +84,21 @@ public class Doctor extends AppCompatActivity {
                 intent.putExtra("user", user);
                 startActivity(intent);
             }
-
         });
+        /**
+         * doctor see his/her service
+         * */
+        doctorAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Doctor.this, DoctorAppointment.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
+
+
+
         /**
          * Get random image from calling api https://picsum.photos/200/300
          * */
