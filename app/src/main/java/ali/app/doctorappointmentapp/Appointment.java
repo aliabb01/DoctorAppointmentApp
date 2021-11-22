@@ -21,6 +21,13 @@ public class Appointment implements Serializable {
         this.service_id = service_id;
     }
 
+    public Appointment(int id, Date date, String time, int user_id) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.user_id = user_id;
+    }
+
     public Appointment(Date date, String time) {
         this.date = date;
         this.time = time;

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +54,17 @@ public class HistoryRecycle extends RecyclerView.Adapter<HistoryRecycle.ViewHold
         holder.history_service.setText(String.valueOf(HistoryRecycle.getService_id()));
          String value=db.getServicehistory(HistoryRecycle.getService_id());
            holder.history_servicename.setText(value);
+
+        holder.cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.cancelappointment(HistoryRecycle.getId());
+                appointments.remove(position);
+                notifyDataSetChanged();
+                Toast.makeText(context.getApplicationContext(),"the record have deleted successfully",Toast.LENGTH_SHORT ).show();
+            }
+        });
+
     }
 
 
@@ -67,6 +79,7 @@ public class HistoryRecycle extends RecyclerView.Adapter<HistoryRecycle.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView history_time,history_date,history_service,history_servicename;
+        Button cancel;
 
         private Button book;
 
@@ -76,7 +89,7 @@ public class HistoryRecycle extends RecyclerView.Adapter<HistoryRecycle.ViewHold
              history_time=itemView.findViewById(R.id.history_time);
              history_service=itemView.findViewById(R.id.history_service);
             history_servicename=itemView.findViewById(R.id.history_servicename);
-
+            cancel=itemView.findViewById(R.id.cancel);
         }
     }
 }
