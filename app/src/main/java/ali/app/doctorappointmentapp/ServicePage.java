@@ -2,6 +2,7 @@ package ali.app.doctorappointmentapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,9 +17,12 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.sql.Time;
 import java.text.ParseException;
@@ -29,7 +33,9 @@ import java.util.List;
 public class ServicePage extends AppCompatActivity {
 
     TextView servicepage_patient,service_pageid,text_time;
-    Button bookAppointment,pickDate;
+    Button bookAppointment;
+    ImageButton pickDate;
+    ConstraintLayout appointment_layout;
     Date date;
     Time Time;
     DBHelper db;
@@ -45,6 +51,7 @@ public class ServicePage extends AppCompatActivity {
         service_pageid=findViewById(R.id.service_pageid);
         bookAppointment=findViewById(R.id.book_appointment);
         text_time=findViewById(R.id.text_time);
+        appointment_layout=findViewById(R.id.appointment_layout);
         /**
          * get user details
          * */
@@ -110,20 +117,22 @@ public class ServicePage extends AppCompatActivity {
                 timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 timePickerDialog.updateTime(h,m);
                 timePickerDialog.show();
-                Toast.makeText(getApplicationContext(),"time"+Time,Toast.LENGTH_SHORT).show();
+             ///   Toast.makeText(getApplicationContext(),"time"+Time,Toast.LENGTH_SHORT).show();
             }
         });
 
         bookAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db = new DBHelper(getApplicationContext());
-                Appointment appointment = new Appointment();
-                appointment.setDate(date);
-                appointment.setTime(text_time.getText().toString());
 
-                db.insertAppointment(appointment,intVariableName,user.getUser_id());
-                  Toast.makeText(getApplicationContext(),"register successfully",Toast.LENGTH_SHORT).show();
+                    db = new DBHelper(getApplicationContext());
+                    Appointment appointment = new Appointment();
+                    appointment.setDate(date);
+                    appointment.setTime(text_time.getText().toString());
+
+                    db.insertAppointment(appointment, intVariableName, user.getUser_id());
+                    ////    Toast.makeText(getApplicationContext(),"register successfully",Toast.LENGTH_SHORT).show();
+                    Snackbar.make(appointment_layout, "appointment created successfully", Snackbar.LENGTH_SHORT).show();
 
             }
         });

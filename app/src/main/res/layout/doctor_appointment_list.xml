@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="200dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_appointment_doctor"
         android:layout_width="409dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="45dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
@@ -18,19 +18,43 @@
             android:id="@+id/doctor_date_appointment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="150dp"
 
+            android:text="TextView" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Appointment date:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textStyle="bold"
+            android:text="Appointment time:" />
         <TextView
             android:id="@+id/doctor_time_appointment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:layout_marginLeft="150dp"
             android:text="TextView" />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:textStyle="bold"
+            android:text="patient name:" />
         <TextView
             android:id="@+id/doctor_user_appointment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
+            android:layout_marginLeft="150dp"
             android:text="TextView" />
 
         <Button
