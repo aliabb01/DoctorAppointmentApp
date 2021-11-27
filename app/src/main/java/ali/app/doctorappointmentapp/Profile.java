@@ -1,5 +1,6 @@
 package ali.app.doctorappointmentapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -11,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,6 +23,7 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.shape.CornerFamily;
+import com.google.android.material.snackbar.Snackbar;
 
 public class Profile extends AppCompatActivity {
 
@@ -28,10 +32,12 @@ public class Profile extends AppCompatActivity {
     private TextView name;
     private TextView email;
     private TextView role;
-
+    private Button deleteAccount,updateAccount;
+    AlertDialog.Builder builder;
     private ImageButton goBackBtn;
     private Button history;
     private ImageView imageView3;
+    ConstraintLayout profile_layout;
 
 
     @Override
@@ -40,6 +46,10 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         imageView3=findViewById(R.id.profileImageChild);
         history=findViewById(R.id.history);
+        deleteAccount=findViewById(R.id.usrDeleteAccount);
+        updateAccount=findViewById(R.id.usrUpdateAccount);
+        profile_layout=findViewById(R.id.profile_layout);
+        builder = new AlertDialog.Builder(this);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         String url="";
 
@@ -95,6 +105,48 @@ public class Profile extends AppCompatActivity {
                 intent.putExtra("user", user);
                 startActivity(intent);
             }
+        });
+        /**update user account
+         * */
+        updateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile.this, UpdateAccount.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
+        deleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Uncomment the below code to Set the message and title from the strings.xml file
+              //  builder.setMessage("DO you want to delete your account?") .setTitle("Delete account");
+
+                //Setting message manually and performing action on button click
+                builder.setMessage("Do you want to delete your account?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                db.deleteUser(user.getUser_id());
+                                Intent intent=new Intent(Profile.this, MainActivity.class);
+                                startActivity(intent);
+                                Snackbar.make(profile_layout,"your accoutn have been delete it",Snackbar.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Action for 'NO' Button
+                                dialog.cancel();
+
+                            }
+                        });
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Delete account");
+                alert.show();
+            }
+
         });
 
     }
