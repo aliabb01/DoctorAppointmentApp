@@ -168,17 +168,52 @@ public class DBHelper extends SQLiteOpenHelper {
      /**
       * get user name in the appointment
       * */
-      public String getuserName(int id){
-          SQLiteDatabase MyDB = this.getWritableDatabase();
-          Cursor cursor = MyDB.rawQuery("Select username  from users where id = ?", new String[]{String.valueOf(id)});
-          cursor.moveToFirst();
-          String name = cursor.getString(0);
-          return name;
-      }
+     public List<User> getUserDetails(int id) {
+         String sql = "select  username,email,password from users where id =" + id;
+         sqLiteDatabase = this.getReadableDatabase();
+         List<User> storeServices = new ArrayList<>();
+         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+         if (cursor.moveToFirst()) {
+             do {
+                 //String id=cursor.getString(0);
+                 //    int i = Integer.parseInt(cursor.getString(0));
+
+                 String name = cursor.getString(0);
+                 String email = cursor.getString(1);
+                 String password = cursor.getString(2);
+
+                 storeServices.add(new User(name,email, password));
+             } while (cursor.moveToNext());
+         }
+         cursor.close();
+         return storeServices;
+     }
+
       /**
        * get doctor id
        * */
       public Integer getdoctorname(int id){
+          SQLiteDatabase MyDB = this.getWritableDatabase();
+          Cursor cursor = MyDB.rawQuery("Select id  from services where user_id = ?", new String[]{String.valueOf(id)});
+          cursor.moveToFirst();
+          int servicename = cursor.getInt(0);;
+          return servicename;
+      }  /**
+     * get user name in the appointment
+     * */
+    public String getuserName(int id){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select username  from users where id = ?", new String[]{String.valueOf(id)});
+        cursor.moveToFirst();
+        String name = cursor.getString(0);
+        return name;
+    }
+
+
+      /**
+       * get user details
+       * **/
+      public Integer getUser(int id){
           SQLiteDatabase MyDB = this.getWritableDatabase();
           Cursor cursor = MyDB.rawQuery("Select id  from services where user_id = ?", new String[]{String.valueOf(id)});
           cursor.moveToFirst();
@@ -256,7 +291,22 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteService(int id) {
 
         sqLiteDatabase = this.getWritableDatabase();
-        sqLiteDatabase.delete("services", "servicesId=?", new String[]{String.valueOf(id)});
+        sqLiteDatabase.delete("services", "id=?", new String[]{String.valueOf(id)});
+    }
+
+    public void deleteUser(int id) {
+
+        sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete("users", "id=?", new String[]{String.valueOf(id)});
+    }
+
+    public void updateUser(User Users) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", Users.getName());
+        contentValues.put("password", Users.getPassword());
+        contentValues.put("email", Users.getEmail());
+        sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.update("users", contentValues, "id" + " =?", new String[]{String.valueOf(Users.getUser_id())});
     }
 
     /**
@@ -267,7 +317,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("serviceName", services.getName());
         contentValues.put("description", services.getDescription());
         sqLiteDatabase = this.getWritableDatabase();
-        sqLiteDatabase.update("services", contentValues, "servicesId" + " =?", new String[]{String.valueOf(services.getId())});
+        sqLiteDatabase.update("services", contentValues, "id" + " =?", new String[]{String.valueOf(services.getId())});
     }
 
     public User checkusernamepassword(String username, String password) {

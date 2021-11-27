@@ -23,6 +23,20 @@ public class User implements Serializable {
         this.Email = email;
     }
 
+    public User(String name, String email, String password) {
+        Name = name;
+        Email = email;
+        this.password = password;
+
+    }
+
+    public User(String name, String email, String password, int user_id) {
+        Name = name;
+        Email = email;
+        this.password = password;
+        this.user_id = user_id;
+    }
+
     public User() {
 
     }
