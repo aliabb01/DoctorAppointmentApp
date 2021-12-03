@@ -5,32 +5,8 @@
     android:id="@+id/appointment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6F7C8F"
+    android:background="#E5E5E5"
     tools:context=".ServicePage">
-
-    <TextView
-        android:id="@+id/servicepage_patient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/service_pageid"
-        android:layout_width="103dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="52dp"
-        android:text="TextView"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- <Button
         android:id="@+id/date"
@@ -45,26 +21,28 @@
 
     <TextView
 
-        android:layout_width="320dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="36dp"
-        android:text="Please select the data and time."
+        android:id="@+id/textView17"
+        android:layout_width="306dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="70dp"
+        android:text="Appointment registration"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/book_appointment"
         android:layout_width="224dp"
         android:layout_height="56dp"
         android:layout_marginBottom="124dp"
+        android:backgroundTint="#2196F3"
         android:text="Book appointment"
         android:textAllCaps="false"
-        android:textColor="#000000"
+        android:textColor="#E5E5E5"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,41 +51,78 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="206dp"
-        android:layout_height="99dp"
-        android:layout_marginTop="136dp"
-        android:src="@mipmap/appointment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Pick a date:"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <ImageButton
         android:id="@+id/date"
-        android:layout_width="129dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="340dp"
-        android:src="@mipmap/appointment_date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/appointmentReg_year"
+        app:layout_constraintStart_toEndOf="@+id/appointmentReg_year"
+        app:layout_constraintTop_toTopOf="@+id/appointmentReg_year"
+        app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
 
     <TextView
+        android:id="@+id/appointmentReg_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="Day"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/appointmentReg_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:hint="Month"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/appointmentReg_day"
+        app:layout_constraintStart_toEndOf="@+id/appointmentReg_day"
+        app:layout_constraintTop_toTopOf="@+id/appointmentReg_day" />
+
+    <TextView
+        android:id="@+id/appointmentReg_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:hint="Year"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/appointmentReg_month"
+        app:layout_constraintStart_toEndOf="@+id/appointmentReg_month"
+        app:layout_constraintTop_toTopOf="@+id/appointmentReg_month" />
+
+    <ImageButton
         android:id="@+id/text_time"
-        android:layout_width="211dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="228dp"
-        android:text="pick Time"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.725"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_time_label"
+        app:layout_constraintStart_toEndOf="@+id/text_time_label"
+        app:layout_constraintTop_toTopOf="@+id/text_time_label"
+        app:srcCompat="@drawable/ic_baseline_access_time_filled_24" />
+
+    <TextView
+        android:id="@+id/text_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="Time"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/appointmentReg_day"
+        app:layout_constraintTop_toBottomOf="@+id/appointmentReg_day" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

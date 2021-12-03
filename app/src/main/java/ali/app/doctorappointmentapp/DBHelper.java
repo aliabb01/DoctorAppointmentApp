@@ -68,24 +68,31 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /****
-     *inset appointment
+     * Insert appointment
      *
      */
-     public  void insertAppointment(Appointment appointment,int service,int user)
+     public boolean insertAppointment(Appointment appointment,int service,int user)
      {
-         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-         SimpleDateFormat simpleDateFormat1=new SimpleDateFormat("HH:mm");
-         ContentValues contentValues=new ContentValues();
-         contentValues.put("date", simpleDateFormat.format(appointment.getDate()));
-         contentValues.put("time",appointment.getTime());
-         contentValues.put("servicesId",service);
-         contentValues.put("user_id", user);
-         SQLiteDatabase MyDB = this.getWritableDatabase();
-         MyDB.insert("appointments", null, contentValues);
-
+         boolean result = false;
+         try {
+             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+             SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm");
+             ContentValues contentValues = new ContentValues();
+             contentValues.put("date", simpleDateFormat.format(appointment.getDate()));
+             contentValues.put("time", appointment.getTime());
+             contentValues.put("servicesId", service);
+             contentValues.put("user_id", user);
+             SQLiteDatabase MyDB = this.getWritableDatabase();
+             MyDB.insert("appointments", null, contentValues);
+             result = true;
+         }
+         catch(Exception e) {
+             result = false;
+         }
+         return result;
      }
      /**
-      * delete appointment
+      * Delete appointment
       * */
      public void cancelappointment(int id) {
          sqLiteDatabase = this.getWritableDatabase();
@@ -109,7 +116,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     /**
-     * get the services belogto specifies  doctor
+     * get the services that belongs to doctor
      */
     public List<Services> getdoctorservice(int user) {
         String sql = "select id,serviceName,description from services where user_id =" + user;
@@ -166,7 +173,7 @@ public class DBHelper extends SQLiteOpenHelper {
      }
 
      /**
-      * get user name in the appointment
+      * get user name in appointment
       * */
      public List<User> getUserDetails(int id) {
          String sql = "select  username,email,password from users where id =" + id;
@@ -198,16 +205,17 @@ public class DBHelper extends SQLiteOpenHelper {
           cursor.moveToFirst();
           int servicename = cursor.getInt(0);;
           return servicename;
-      }  /**
-     * get user name in the appointment
-     * */
-    public String getuserName(int id){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select username  from users where id = ?", new String[]{String.valueOf(id)});
-        cursor.moveToFirst();
-        String name = cursor.getString(0);
-        return name;
-    }
+      }
+      /**
+        * get user name in the appointment
+        * */
+      public String getuserName(int id){
+          SQLiteDatabase MyDB = this.getWritableDatabase();
+          Cursor cursor = MyDB.rawQuery("Select username  from users where id = ?", new String[]{String.valueOf(id)});
+          cursor.moveToFirst();
+          String name = cursor.getString(0);
+          return name;
+      }
 
 
       /**
