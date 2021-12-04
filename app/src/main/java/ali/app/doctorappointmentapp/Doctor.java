@@ -208,7 +208,7 @@ public class Doctor extends AppCompatActivity {
         profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Doctor.this, Profile.class);
+                Intent intent = new Intent(Doctor.this, DoctorProfile.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
             }

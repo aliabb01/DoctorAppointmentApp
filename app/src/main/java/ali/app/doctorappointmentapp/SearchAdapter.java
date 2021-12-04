@@ -1,6 +1,9 @@
 package ali.app.doctorappointmentapp;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
@@ -45,12 +49,25 @@ public class SearchAdapter extends ArrayAdapter<Services> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = LayoutInflater.from(context).inflate(R.layout.search_item,null);
-  Services service=services.get(position);
-
+        Services service=services.get(position);
+        Intent intent =((Activity) context).getIntent();
+        User user = (User) intent.getSerializableExtra("user");
         TextView textView=view.findViewById(R.id.textView10);
         textView.setText(service.getName());
         TextView textView1=view.findViewById(R.id.textView11);
         textView1.setText(service.getDescription());
+        CardView search_card=view.findViewById(R.id.search_card);
+        search_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ServicePage.class);
+                Bundle extras = new Bundle();
+                extras.putString("service", service.getId() + "");
+                intent.putExtras(extras);
+                intent.putExtra("user",user);
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
     @NonNull

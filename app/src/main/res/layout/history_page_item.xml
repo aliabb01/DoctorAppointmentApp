@@ -3,87 +3,131 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="190dp">
+    android:layout_height="170dp">
 
     <androidx.cardview.widget.CardView
 
-        android:layout_width="409dp"
-        android:layout_height="174dp"
-        android:layout_marginTop="55dp"
+        android:layout_width="413dp"
+        android:layout_height="144dp"
+        android:layout_marginTop="15dp"
+        android:descendantFocusability="blocksDescendants"
+        app:cardBackgroundColor="#03A9F4"
+        app:contentPadding="3dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/history_date"
-            android:layout_width="123dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="50dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="134dp"
+            android:background="@android:color/white"
+            android:padding="8dp">
 
-        <TextView
-            android:layout_width="124dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:text="appointment_date" />
+            <View
+                android:id="@+id/view"
+                android:layout_width="1dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="288dp"
+                android:layout_marginTop="8dp"
+                android:background="#00BCD4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/history_time"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="85dp" />
+            <TextView
+                android:id="@+id/history_date"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/history_servicename"
+                app:layout_constraintHorizontal_bias="0.075"
+                app:layout_constraintStart_toStartOf="@+id/history_servicename"
+                app:layout_constraintTop_toBottomOf="@+id/history_servicename" />
 
-        <TextView
-            android:layout_width="129dp"
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="124dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="appointment_date"
+                app:layout_constraintEnd_toEndOf="@+id/textView19"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView19"
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="85dp"
-            android:text="appointment_time" />
+            <TextView
+                android:id="@+id/history_time"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/history_date"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/history_date"
+                app:layout_constraintTop_toBottomOf="@+id/history_date" />
 
-        <TextView
-            android:id="@+id/history_service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="95dp"
-            android:visibility="gone"
-            android:text="service_id" />
+            <TextView
+                android:id="@+id/textView18"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="95dp"
-            android:visibility="gone"
-            android:text="service_id" />
+                android:layout_width="129dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="appointment_time"
+                app:layout_constraintEnd_toEndOf="@+id/textView20"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
-        <TextView
-            android:id="@+id/history_servicename"
-            android:layout_width="83dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="15dp"
-            android:text="TextView" />
+            <TextView
+                android:id="@+id/history_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="service_id"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView21" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:text="service_name" />
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="service_id"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="85dp"
-            android:text="Cancel" />
+            <TextView
+                android:id="@+id/history_servicename"
+                android:layout_width="83dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="148dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/textView19"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView19"
+                app:layout_constraintVertical_bias="0.0" />
 
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+
+                android:text="service_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="92dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="4dp"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <View
