@@ -106,7 +106,7 @@ public class Home extends AppCompatActivity {
          * * */
    public  void loadResult(){
         List<Services> services=new ArrayList<Services>();
-        SearchAdapter searchAdapter=new SearchAdapter(getApplicationContext(),services);
+        SearchAdapter searchAdapter=new SearchAdapter(Home.this,services);
       //  autoComplete.setThreshold(1);
         autoComplete.setAdapter(searchAdapter);
 

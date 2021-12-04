@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,22 @@ public class DoctorAppointmentAdapter extends RecyclerView.Adapter<DoctorAppoint
         final Appointment HistoryRecycle  = appointments.get(position);
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         holder.doctor_date.setText(simpleDateFormat.format(HistoryRecycle.getDate()));
+        holder.show_treatment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.treatment.setVisibility(View.VISIBLE);
+                holder.hide_treatment.setVisibility(View.VISIBLE);
+                holder.show_treatment.setVisibility(View.GONE);
+            }
+        });
+        holder.hide_treatment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.treatment.setVisibility(View.GONE);
+                holder.hide_treatment.setVisibility(View.GONE);
+                holder.show_treatment.setVisibility(View.VISIBLE);
+            }
+        });
         holder.doctor_time.setText(HistoryRecycle.getTime().toString());
       //  holder.doctor_user.setText(String.valueOf(HistoryRecycle.getUser_id()).toString());
         String user=db.getuserName(HistoryRecycle.getUser_id());
@@ -68,6 +85,7 @@ public class DoctorAppointmentAdapter extends RecyclerView.Adapter<DoctorAppoint
 
         TextView doctor_date,doctor_time,doctor_user;
         Button treatment;
+        ImageButton show_treatment,hide_treatment;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -77,6 +95,8 @@ public class DoctorAppointmentAdapter extends RecyclerView.Adapter<DoctorAppoint
             doctor_date = itemView.findViewById(R.id.doctor_date_appointment);
             doctor_time=itemView.findViewById(R.id.doctor_time_appointment);
             doctor_user=itemView.findViewById(R.id.doctor_user_appointment);
+            show_treatment=itemView.findViewById(R.id.show_treatment);
+            hide_treatment=itemView.findViewById(R.id.hide_treatment);
             treatment=itemView.findViewById(R.id.treatment);
         }
     }
