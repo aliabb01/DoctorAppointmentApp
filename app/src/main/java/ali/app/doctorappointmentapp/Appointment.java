@@ -1,10 +1,7 @@
 package ali.app.doctorappointmentapp;
 
 
-import android.widget.CalendarView;
-
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 
 public class Appointment implements Serializable {
@@ -14,10 +11,17 @@ public class Appointment implements Serializable {
     private int user_id;
     private  int service_id;
 
-
     public Appointment(Date date, String time, int service_id) {
         this.date = date;
         this.time = time;
+        this.service_id = service_id;
+    }
+
+    public Appointment(int id, Date date, String time, int user_id, int service_id) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.user_id = user_id;
         this.service_id = service_id;
     }
 

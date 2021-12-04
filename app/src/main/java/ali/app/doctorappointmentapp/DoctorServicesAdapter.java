@@ -50,7 +50,7 @@ public class DoctorServicesAdapter extends RecyclerView.Adapter<DoctorServicesAd
         holder.textView4.setText(Integer.toString(DoctorServicesAdapter.getId()));
         holder.name.setText(DoctorServicesAdapter.getName());
         holder.desc.setText(DoctorServicesAdapter.getDescription());
-       holder.delete_servcie.setOnClickListener(new View.OnClickListener() {
+        holder.delete_servcie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

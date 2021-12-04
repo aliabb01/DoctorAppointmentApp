@@ -62,7 +62,7 @@ public class Profile extends AppCompatActivity {
         db = new DBHelper(this);
         User user = (User) intent.getSerializableExtra("user");
 
-        // Dependent on user Role shows appointment function
+        // Show appointment history dependent on user role
         if(user.getRole().equals("Doctor")) {
             history.setVisibility(View.GONE);
             historyIcon.setVisibility(View.GONE);

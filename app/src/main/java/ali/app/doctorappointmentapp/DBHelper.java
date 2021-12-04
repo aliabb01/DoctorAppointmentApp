@@ -232,7 +232,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * get appointment list
      * */
     public List<Appointment> getappointment(int id) {
-        String sql = "select date,time,servicesId from appointments where user_id =" + id;
+        String sql = "select id,date,time,servicesId, user_id from appointments where user_id =" + id;
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         sqLiteDatabase = this.getReadableDatabase();
         List<Appointment> storeServices = new ArrayList<>();
@@ -243,10 +243,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 //    int i = Integer.parseInt(cursor.getString(0));
 
              try{
-                 Date date = simpleDateFormat.parse(cursor.getString(0));
-                String time = cursor.getString(1);
-                int service = Integer.parseInt(cursor.getString(2));
-                storeServices.add(new Appointment(date,time,service));
+                 int idLocal = Integer.parseInt(cursor.getString(0));
+                 Date date = simpleDateFormat.parse(cursor.getString(1));
+                 String time = cursor.getString(2);
+                 int service = Integer.parseInt(cursor.getString(3));
+                 int user = Integer.parseInt(cursor.getString(4));
+                 storeServices.add(new Appointment(idLocal, date,time,service, user));
              }catch (Exception e){
                  return null;
              }
