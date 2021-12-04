@@ -25,6 +25,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.snackbar.Snackbar;
 
+
 public class Profile extends AppCompatActivity {
 
     DBHelper db;
@@ -36,7 +37,7 @@ public class Profile extends AppCompatActivity {
     AlertDialog.Builder builder;
     private ImageButton goBackBtn;
     private Button history;
-    private ImageView imageView3;
+    private ImageView imageView3, historyIcon;
     ConstraintLayout profile_layout;
 
 
@@ -44,8 +45,12 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+
+
         imageView3=findViewById(R.id.profileImageChild);
         history=findViewById(R.id.history);
+        historyIcon=findViewById(R.id.history_icon);
         deleteAccount=findViewById(R.id.usrDeleteAccount);
         updateAccount=findViewById(R.id.usrUpdateAccount);
         profile_layout=findViewById(R.id.profile_layout);
@@ -56,6 +61,13 @@ public class Profile extends AppCompatActivity {
         Intent intent = getIntent();
         db = new DBHelper(this);
         User user = (User) intent.getSerializableExtra("user");
+
+        // Dependent on user Role shows appointment function
+        if(user.getRole().equals("Doctor")) {
+            history.setVisibility(View.GONE);
+            historyIcon.setVisibility(View.GONE);
+        }
+
         Log.d("Tag", "onCreate: " + user);
 
         ImageRequest imageRequest=new ImageRequest("https://picsum.photos/id/" + String.valueOf(user.getUser_id()) + "/300/300", new Response.Listener<Bitmap>() {
@@ -70,9 +82,6 @@ public class Profile extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
-
-/*        imageView3.setShapeAppearanceModel(imageView3.getShapeAppearanceModel()
-        .toBuilder().setAllCorners(CornerFamily.ROUNDED, 300).build());*/
 
         MySingleton.getInstance(Profile.this).addRequest(imageRequest);
 
@@ -148,6 +157,7 @@ public class Profile extends AppCompatActivity {
             }
 
         });
+
 
     }
 
