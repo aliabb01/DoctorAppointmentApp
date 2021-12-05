@@ -161,15 +161,29 @@ public class DBHelper extends SQLiteOpenHelper {
         return storeServices;
     }
      /**
-      * history service details
+      * History service details
       *
       * @return*/
      public String getServicehistory(int id) {
          SQLiteDatabase MyDB = this.getWritableDatabase();
-         Cursor cursor = MyDB.rawQuery("Select serviceName  from services where id = ?", new String[]{String.valueOf(id)});
+         // Log.d("AAAAAAA", "GETTING ID: "+ id); returns id
+
+         // Get service-id from appointments table
+         Cursor cursor = MyDB.rawQuery("select servicesId from appointments where id = ?", new String[]{String.valueOf(id)});
          cursor.moveToFirst();
-         String servicename = cursor.getString(0);
-         return servicename;
+         String serviceId = cursor.getString(0);
+         Log.d("TAG", "SERVICEID: "+serviceId);
+         cursor.close();
+
+         // Get serviceName by the given service Id
+         Cursor cursorNext = MyDB.rawQuery("select serviceName from services where id = ?", new String[]{String.valueOf(serviceId)});
+         // Log.d("NEWTAG", "CURSOR MOVE TO FIRST: "+ cursor.moveToFirst()); returns false
+         cursorNext.moveToFirst();
+         String servName = cursorNext.getString(0);
+         Log.d("TAG", "SERVICENAME: "+ servName);
+         cursorNext.close();
+
+         return servName;
      }
 
      /**
@@ -203,7 +217,7 @@ public class DBHelper extends SQLiteOpenHelper {
           SQLiteDatabase MyDB = this.getWritableDatabase();
           Cursor cursor = MyDB.rawQuery("Select id  from services where user_id = ?", new String[]{String.valueOf(id)});
           cursor.moveToFirst();
-          int servicename = cursor.getInt(0);;
+          int servicename = cursor.getInt(0);
           return servicename;
       }
       /**

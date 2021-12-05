@@ -47,11 +47,14 @@ public class HistoryRecycle extends RecyclerView.Adapter<HistoryRecycle.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Intent intent = ((Activity)context).getIntent();
         Services services = (Services) intent.getSerializableExtra("service");
-        final Appointment HistoryRecycle  = appointments.get(position);
+        Log.d("TAG", "GETPOSITION: " + position);
+        Log.d("TAG", "GETADPOSITION: " + holder.getAdapterPosition());
+        final Appointment HistoryRecycle  = appointments.get(holder.getAdapterPosition());
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         holder.history_date.setText(simpleDateFormat.format(HistoryRecycle.getDate()));
         holder.history_time.setText(HistoryRecycle.getTime().toString());
         holder.history_service.setText(String.valueOf(HistoryRecycle.getService_id()));
+        Log.d("TAG", "HISTTTTTT: "+ HistoryRecycle.getService_id());
         String value=db.getServicehistory(HistoryRecycle.getService_id());
         holder.history_servicename.setText(value);
 
