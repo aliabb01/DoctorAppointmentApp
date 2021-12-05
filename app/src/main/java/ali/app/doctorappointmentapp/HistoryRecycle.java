@@ -51,9 +51,11 @@ public class HistoryRecycle extends RecyclerView.Adapter<HistoryRecycle.ViewHold
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         holder.history_date.setText(simpleDateFormat.format(HistoryRecycle.getDate()));
         holder.history_time.setText(HistoryRecycle.getTime().toString());
-        holder.history_service.setText(String.valueOf(HistoryRecycle.getService_id()));
-        String value=db.getServicehistory(HistoryRecycle.getService_id());
-        holder.history_servicename.setText(value);
+        holder.history_service.setText(String.valueOf(HistoryRecycle.getId()));
+        int value=db.getAppointmentId(HistoryRecycle.getId());
+
+        String serviceName = db.getServicehistory(value);
+        holder.history_servicename.setText(serviceName);
 
         holder.cancel.setOnClickListener(new View.OnClickListener() {
             @Override

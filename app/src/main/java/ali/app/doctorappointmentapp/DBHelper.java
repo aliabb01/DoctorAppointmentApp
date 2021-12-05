@@ -161,7 +161,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return storeServices;
     }
      /**
-      * history service details
+      * history service detail
       *
       * @return*/
      public String getServicehistory(int id) {
@@ -171,6 +171,15 @@ public class DBHelper extends SQLiteOpenHelper {
          String servicename = cursor.getString(0);
          return servicename;
      }
+
+    public Integer getAppointmentId(int id){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select servicesId from appointments where id = ?", new String[]{String.valueOf(id)});
+        cursor.moveToFirst();
+        int servicename = cursor.getInt(0);;
+        return servicename;
+    }
+
 
      /**
       * get user name in appointment
@@ -232,7 +241,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * get appointment list
      * */
     public List<Appointment> getappointment(int id) {
-        String sql = "select id,date,time,servicesId, user_id from appointments where user_id =" + id;
+        String sql = "select id,date,time from appointments where user_id =" + id;
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         sqLiteDatabase = this.getReadableDatabase();
         List<Appointment> storeServices = new ArrayList<>();
@@ -243,12 +252,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 //    int i = Integer.parseInt(cursor.getString(0));
 
              try{
-                 int idLocal = Integer.parseInt(cursor.getString(0));
+                 int localId=Integer.parseInt(cursor.getString(0));
                  Date date = simpleDateFormat.parse(cursor.getString(1));
                  String time = cursor.getString(2);
-                 int service = Integer.parseInt(cursor.getString(3));
-                 int user = Integer.parseInt(cursor.getString(4));
-                 storeServices.add(new Appointment(idLocal, date,time,service, user));
+                 //int service = Integer.parseInt(cursor.getString(3));
+                 storeServices.add(new Appointment(localId, date,time));
              }catch (Exception e){
                  return null;
              }
