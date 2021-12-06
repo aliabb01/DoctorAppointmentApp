@@ -50,7 +50,6 @@ public class Profile extends AppCompatActivity {
 
         imageView3=findViewById(R.id.profileImageChild);
         history=findViewById(R.id.history);
-        historyIcon=findViewById(R.id.history_icon);
         deleteAccount=findViewById(R.id.usrDeleteAccount);
         updateAccount=findViewById(R.id.usrUpdateAccount);
         profile_layout=findViewById(R.id.profile_layout);
