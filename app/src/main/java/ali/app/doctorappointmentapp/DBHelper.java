@@ -19,16 +19,16 @@ public class DBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, "App.db", null, 6);
+        super(context, "App.db", null, 7);
     }
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
         //MyDB.execSQL("PRAGMA foreign_keys=ON;");
         MyDB.execSQL("create Table users(id INTEGER primary key AUTOINCREMENT ,username TEXT ,role TEXT ,password TEXT ,email TEXT)");
-        MyDB.execSQL("create Table services(id INTEGER primary key AUTOINCREMENT, serviceName TEXT,description TEXT, user_id INTEGER,FOREIGN KEY (user_id) REFERENCES users (id))");
+        MyDB.execSQL("Create Table services(id INTEGER primary key AUTOINCREMENT, serviceName TEXT,description TEXT, user_id INTEGER,FOREIGN KEY (user_id) REFERENCES users (id))");
         MyDB.execSQL("CREATE TABLE appointments (id INTEGER primary key autoincrement NOT NULL,date TEXT,time TEXT,servicesId INTEGER,user_id INTEGER,FOREIGN KEY (servicesId) REFERENCES services (id) ON DELETE CASCADE,FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE)");
-
+        MyDB.execSQL("CREATE TABLE treatments (id INTEGER primary key autoincrement NOT NULL, description TEXT, appointmentId INTEGER, FOREIGN KEY (appointmentId) REFERENCES appointments (id) ON DELETE CASCADE)");
 
         // MyDB.execSQL("PRAGMA foreign_keys=ON");
     }
@@ -97,6 +97,30 @@ public class DBHelper extends SQLiteOpenHelper {
      public void cancelappointment(int id) {
          sqLiteDatabase = this.getWritableDatabase();
          sqLiteDatabase.delete("appointments", "id=?", new String[]{String.valueOf(id)});
+     }
+
+     public void insertTreatment(Treatment treatment, int appointmentId) {
+         try {
+             ContentValues contentValues = new ContentValues();
+             contentValues.put("description", treatment.getDescription());
+             contentValues.put("appointmentId", appointmentId);
+
+             SQLiteDatabase DB = this.getWritableDatabase();
+             DB.insert("treatments", null, contentValues);
+         } catch(Exception e) {
+             Log.d("EXCEPTION", "insertTreatment: "+ e);
+         }
+     }
+
+     public String getTreatmentDesc(int id) {
+         SQLiteDatabase MyDB = this.getWritableDatabase();
+         Cursor cursor = MyDB.rawQuery("Select description from treatments where appointmentId = ?", new String[]{String.valueOf(id)});
+         String treatDesc = "No treatment description yet";
+         if(cursor!=null && cursor.moveToFirst()) {
+             treatDesc = cursor.getString(0);
+         }
+         return treatDesc;
+
      }
 
 

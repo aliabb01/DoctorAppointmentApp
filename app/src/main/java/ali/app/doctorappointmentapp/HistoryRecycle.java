@@ -52,6 +52,16 @@ public class HistoryRecycle extends RecyclerView.Adapter<HistoryRecycle.ViewHold
         holder.history_date.setText(simpleDateFormat.format(HistoryRecycle.getDate()));
         holder.history_time.setText(HistoryRecycle.getTime().toString());
         holder.history_service.setText(String.valueOf(HistoryRecycle.getId()));
+
+        String val = db.getTreatmentDesc(HistoryRecycle.getId());
+        try {
+            holder.treatmentDesc__recycle.setText(val);
+        }
+        catch(Exception e) {
+            val=null;
+            holder.treatmentDesc__recycle.setText("No treatment yet");
+        }
+
         int value=db.getAppointmentId(HistoryRecycle.getId());
 
         String serviceName = db.getServicehistory(value);
@@ -81,7 +91,7 @@ public class HistoryRecycle extends RecyclerView.Adapter<HistoryRecycle.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView history_time,history_date,history_service,history_servicename;
+        private TextView history_time,history_date,history_service,history_servicename, treatmentDesc__recycle;
         Button cancel;
 
         private Button book;
@@ -92,6 +102,7 @@ public class HistoryRecycle extends RecyclerView.Adapter<HistoryRecycle.ViewHold
             history_time=itemView.findViewById(R.id.history_time);
             history_service=itemView.findViewById(R.id.history_service);
             history_servicename=itemView.findViewById(R.id.history_servicename);
+            treatmentDesc__recycle = itemView.findViewById(R.id.treatmentDesc__recycle);
             cancel=itemView.findViewById(R.id.cancel);
         }
     }

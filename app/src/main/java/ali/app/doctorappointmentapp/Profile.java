@@ -46,8 +46,6 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-
-
         imageView3=findViewById(R.id.profileImageChild);
         history=findViewById(R.id.history);
         deleteAccount=findViewById(R.id.usrDeleteAccount);
