@@ -14,7 +14,6 @@ import java.util.List;
 public class DoctorAppointment extends AppCompatActivity {
 
     RecyclerView recycle_doctor_appointment;
-    TextView my_service;
     DBHelper db;
 
     @Override
@@ -22,12 +21,10 @@ public class DoctorAppointment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_appointment);
         recycle_doctor_appointment=findViewById(R.id.recycle_doctor_appointment);
-        my_service=findViewById(R.id.my_service);
         db = new DBHelper(this);
         Intent intent = getIntent();
         User user = (User) intent.getSerializableExtra("user");
         int value=db.getdoctorname(user.getUser_id());
-        my_service.setText(String.valueOf(value));
 
         recycle_doctor_appointment.setLayoutManager(new LinearLayoutManager(this));
         recycle_doctor_appointment.setHasFixedSize(true);

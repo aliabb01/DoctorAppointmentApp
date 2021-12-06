@@ -2,6 +2,7 @@ package ali.app.doctorappointmentapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -44,30 +48,64 @@ public class DoctorAppointmentAdapter extends RecyclerView.Adapter<DoctorAppoint
         final Appointment HistoryRecycle  = appointments.get(position);
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         holder.doctor_date.setText(simpleDateFormat.format(HistoryRecycle.getDate()));
-        holder.show_treatment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.treatment.setVisibility(View.VISIBLE);
-                holder.hide_treatment.setVisibility(View.VISIBLE);
-                holder.show_treatment.setVisibility(View.GONE);
-            }
-        });
-        holder.hide_treatment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.treatment.setVisibility(View.GONE);
-                holder.hide_treatment.setVisibility(View.GONE);
-                holder.show_treatment.setVisibility(View.VISIBLE);
-            }
-        });
+
         holder.doctor_time.setText(HistoryRecycle.getTime().toString());
-      //  holder.doctor_user.setText(String.valueOf(HistoryRecycle.getUser_id()).toString());
+        //holder.doctor_user.setText(String.valueOf(HistoryRecycle.getUser_id()).toString());
         String user=db.getuserName(HistoryRecycle.getUser_id());
         holder.doctor_user.setText(user);
+
+
         holder.treatment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ///dialog to add treatment of user
+                // dialog to add treatment of user
+
+                MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(view.getContext());
+                dialogBuilder.setTitle("Add a treatment");
+
+                View viewInflated = LayoutInflater.from(view.getContext().getApplicationContext()).inflate(R.layout.activity_add_treatment, (ViewGroup) holder.v, false);
+
+                dialogBuilder.setView(viewInflated);
+
+                TextInputEditText treatmentDesc = (TextInputEditText) viewInflated.findViewById(R.id.treatmentDesc);
+
+                dialogBuilder.setIcon(R.drawable.ic_baseline_post_add_24);
+                dialogBuilder.setBackground(view.getContext().getResources().getDrawable(R.drawable.alert_dialog_bg, null));
+
+                dialogBuilder.setPositiveButton("Add Treatment", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        db = new DBHelper(view.getContext().getApplicationContext());
+
+                        String treatmentDescLabel = treatmentDesc.getText().toString();
+
+                        if (treatmentDescLabel.length() <= 0) {
+                            Toast.makeText(view.getContext().getApplicationContext(), "Fill all the fields", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Treatment treatment = new Treatment(treatmentDescLabel, HistoryRecycle.getId());
+
+
+                            db.insertTreatment(treatment, HistoryRecycle.getId());
+                            Toast.makeText(view.getContext().getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
+
+                            /// finish();
+                        }
+                    }
+
+
+
+
+                });
+
+                dialogBuilder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                dialogBuilder.show();
             }
         });
     }
@@ -85,19 +123,17 @@ public class DoctorAppointmentAdapter extends RecyclerView.Adapter<DoctorAppoint
 
         TextView doctor_date,doctor_time,doctor_user;
         Button treatment;
-        ImageButton show_treatment,hide_treatment;
+        ViewGroup v;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-
             doctor_date = itemView.findViewById(R.id.doctor_date_appointment);
             doctor_time=itemView.findViewById(R.id.doctor_time_appointment);
             doctor_user=itemView.findViewById(R.id.doctor_user_appointment);
-            show_treatment=itemView.findViewById(R.id.show_treatment);
-            hide_treatment=itemView.findViewById(R.id.hide_treatment);
             treatment=itemView.findViewById(R.id.treatment);
+            v = itemView.findViewById(R.id.content);
         }
     }
 }

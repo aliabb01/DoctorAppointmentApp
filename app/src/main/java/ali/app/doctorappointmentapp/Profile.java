@@ -37,7 +37,7 @@ public class Profile extends AppCompatActivity {
     AlertDialog.Builder builder;
     private ImageButton goBackBtn;
     private Button history;
-    private ImageView imageView3, historyIcon;
+    private ImageView imageView3;
     ConstraintLayout profile_layout;
 
 
@@ -45,8 +45,6 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
-
 
         imageView3=findViewById(R.id.profileImageChild);
         history=findViewById(R.id.history);
@@ -64,7 +62,6 @@ public class Profile extends AppCompatActivity {
         // Show appointment history dependent on user role
         if(user.getRole().equals("Doctor")) {
             history.setVisibility(View.GONE);
-            historyIcon.setVisibility(View.GONE);
         }
 
         Log.d("Tag", "onCreate: " + user);
