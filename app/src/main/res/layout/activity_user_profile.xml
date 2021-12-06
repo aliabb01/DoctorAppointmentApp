@@ -75,28 +75,6 @@
 
         <!-- Should be not visible if Doctor START -->
 
-        <ImageView
-            android:id="@+id/history_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_hisoty"
-            app:layout_constraintBottom_toBottomOf="@+id/history"
-            app:layout_constraintEnd_toStartOf="@+id/history"
-            app:layout_constraintTop_toTopOf="@+id/history"
-            app:layout_constraintVertical_bias="0.0"
-            />
-
-        <Button
-            android:id="@+id/history"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="4dp"
-            android:text="appointment"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
         <!-- Should be not visible if Doctor END -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -138,6 +116,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginStart="16dp"
@@ -146,9 +125,8 @@
             android:background="#F4F4F4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
 
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView12"
@@ -193,31 +171,56 @@
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="@+id/profile_about_role"
                 app:layout_constraintTop_toBottomOf="@+id/profile_about_role" />
+
+            <Button
+                android:id="@+id/history"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="View appointments"
+                android:textAllCaps="false"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:rippleColor="#2196F3"
+                app:strokeColor="#000000" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/usrUpdateAccount"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="156dp"
-            android:text="Update"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#E5E5E5"
+            android:text="Edit profile"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/usrDeleteAccount"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textColor="@android:color/primary_text_light"
+            app:icon="@drawable/ic_baseline_edit_24"
+            app:iconTint="#2196F3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
         <Button
             android:id="@+id/usrDeleteAccount"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="92dp"
-            android:layout_marginBottom="156dp"
-            android:text="Delete"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="Delete profile"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:textColor="@android:color/primary_text_light"
+            app:icon="@drawable/ic_baseline_delete_24"
+            app:iconTint="#FF5C5C"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            app:rippleColor="#FF5454"
+            app:strokeColor="#F44336" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
