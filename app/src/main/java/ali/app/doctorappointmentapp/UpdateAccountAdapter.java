@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -43,25 +44,55 @@ public class UpdateAccountAdapter extends RecyclerView.Adapter<UpdateAccountAdap
         holder.my.setText(Integer.toString(usera.getUser_id()));
         holder.name.setText(serviceAdapter.getName());
         holder.email.setText(serviceAdapter.getEmail());
-        holder.password.setText(serviceAdapter.getPassword());
+       // holder.password.setText(serviceAdapter.getPassword());
+        holder.user_arrowdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.password.setVisibility(View.VISIBLE);
+                holder.confirmUpdatePassword.setVisibility(View.VISIBLE);
+                holder.textView28.setVisibility(View.VISIBLE);
+                holder.user_arrowup.setVisibility(View.VISIBLE);
+                holder.user_arrowdown.setVisibility(View.GONE);
+            }
+        });
+        holder.user_arrowup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.password.setVisibility(View.GONE);
+                holder.confirmUpdatePassword.setVisibility(View.GONE);
+                holder.textView28.setVisibility(View.GONE);
+                holder.user_arrowup.setVisibility(View.GONE);
+                holder.user_arrowdown.setVisibility(View.VISIBLE);
+            }
+        });
+
         holder.confirm_update.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 String name=holder.name.getText().toString();
                 String email=holder.email.getText().toString();
                 String password=holder.password.getText().toString();
+                String repassword=holder.confirmUpdatePassword.getText().toString();
                 boolean checkName = db.checkusername(holder.name.getText().toString());
-                if (checkName == false) {
+                if (name.equals("") || email.equals("")) {
+                    Toast.makeText(view.getContext(), "Please enter all fields", Toast.LENGTH_SHORT).show();
+                } else {
+
+                if(password.equals(repassword)){
+               
                 db.updateUser(new User(name,email,password,usera.getUser_id()));
                 Toast.makeText(view.getContext(),"Updated successfully",Toast.LENGTH_SHORT).show();
                 notifyDataSetChanged();
                 // ((Activity)context).finish();
                 Intent intent = new Intent(view.getContext(), SignIn.class);
                 context.startActivity(intent);
-            }else
+
+                }else
                 {
-                    Toast.makeText(view.getContext(),"name is already exist",Toast.LENGTH_SHORT).show();
-                }
+                    Toast.makeText(view.getContext(),"password not match",Toast.LENGTH_SHORT).show();
+
+                }}
             }
         });
     }
@@ -73,8 +104,11 @@ public class UpdateAccountAdapter extends RecyclerView.Adapter<UpdateAccountAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private EditText name,email,password;
+        private EditText name,email,password,confirmUpdatePassword;
+        TextView textView28;
+        ImageView user_arrowdown,user_arrowup;
         Button confirm_update;
+
         TextView my;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +116,10 @@ public class UpdateAccountAdapter extends RecyclerView.Adapter<UpdateAccountAdap
             email = itemView.findViewById(R.id.userEmail);
             password=itemView.findViewById(R.id.passwordUser);
             confirm_update=itemView.findViewById(R.id.confirm_update);
+            user_arrowdown=itemView.findViewById(R.id.user_arrowdown);
+            user_arrowup=itemView.findViewById(R.id.user_arrowup);
+            textView28=itemView.findViewById(R.id.textView28);
+            confirmUpdatePassword=itemView.findViewById(R.id.confirmUpdatePassword);
             my=itemView.findViewById(R.id.my);
            /* update_user=itemView.findViewById(R.id.updateUser);
             delete_user=itemView.findViewById(R.id.deleteUser);*/
